@@ -93,5 +93,11 @@ namespace Lab1
             Filters.Filter filter = new Filters.GaussianFilter();
             backgroundWorker1.RunWorkerAsync(filter);
         }
+
+        private void ñåïèÿToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.SepiaFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
     }
 }

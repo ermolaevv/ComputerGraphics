@@ -39,5 +39,11 @@ namespace Lab1.Filters
             }
             return value;
         }
+        protected int GetIntesity(Color sourceColor)
+        {
+            return (int)(0.299 * sourceColor.R +
+                                0.587 * sourceColor.G +
+                                0.114 * sourceColor.B);
+        }
     }
 }
