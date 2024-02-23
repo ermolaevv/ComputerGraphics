@@ -3,6 +3,7 @@ namespace Lab1
     public partial class Form1 : Form
     {
         private static Bitmap src;
+        private static Bitmap reference;
         public Form1()
         {
             InitializeComponent();
@@ -17,8 +18,13 @@ namespace Lab1
             string filename = openFileDialog1.FileName;
 
             src = Service.CreateNonIndexedImage(new Bitmap(filename));
+            reference = src;
 
             pictureBox1.Image = src;
+
+            ôèëüòğûToolStripMenuItem.Enabled = true;
+            âîññòàíîâèòüToolStripMenuItem.Enabled = true;
+            saveToolStripMenuItem.Enabled = true;
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -98,6 +104,13 @@ namespace Lab1
         {
             Filters.Filter filter = new Filters.SepiaFilter();
             backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void âîññòàíîâèòüToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            src = reference;
+            pictureBox1.Image = src;
+            pictureBox1.Refresh();
         }
     }
 }
