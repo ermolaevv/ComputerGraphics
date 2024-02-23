@@ -26,8 +26,8 @@ namespace Lab1
 
             pictureBox1.Image = src;
 
-            ôèëüòğûToolStripMenuItem.Enabled = true;
-            âîññòàíîâèòüToolStripMenuItem.Enabled = true;
+            Ñ„Ğ¸Ğ»ÑŒÑ‚Ñ€Ñ‹ToolStripMenuItem.Enabled = true;
+            Ğ²Ğ¾ÑÑÑ‚Ğ°Ğ½Ğ¾Ğ²Ğ¸Ñ‚ÑŒToolStripMenuItem.Enabled = true;
             saveToolStripMenuItem.Enabled = true;
         }
 
@@ -48,7 +48,8 @@ namespace Lab1
             }
         }
         #endregion
-        private void âîññòàíîâèòüToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void Ğ²Ğ¾ÑÑÑ‚Ğ°Ğ½Ğ¾Ğ²Ğ¸Ñ‚ÑŒToolStripMenuItem_Click(object sender, EventArgs e)
         {
             updateHistory();
             src = reference;
@@ -88,7 +89,7 @@ namespace Lab1
                         undo();
                         break;
                     case Keys.R:
-                        âîññòàíîâèòüToolStripMenuItem_Click(sender, e);
+                        Ğ²Ğ¾ÑÑÑ‚Ğ°Ğ½Ğ¾Ğ²Ğ¸Ñ‚ÑŒToolStripMenuItem_Click(sender, e);
                         break;
                 }
             }
@@ -133,7 +134,7 @@ namespace Lab1
         #endregion
 
         #region FilterItem_Click
-        private void èíâåğñèÿToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Ğ¸Ğ½Ğ²ĞµÑ€ÑĞ¸ÑToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters.Filter filter = new Filters.InvertFilter();
             backgroundWorker1.RunWorkerAsync(filter);
@@ -144,19 +145,19 @@ namespace Lab1
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
-        private void ğàçìûòèåToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Ñ€Ğ°Ğ·Ğ¼Ñ‹Ñ‚Ğ¸ĞµToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters.Filter filter = new Filters.BlurFilter();
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
-        private void ğàçìûòèåÏîÃàóññóToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Ñ€Ğ°Ğ·Ğ¼Ñ‹Ñ‚Ğ¸ĞµĞŸĞ¾Ğ“Ğ°ÑƒÑÑÑƒToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters.Filter filter = new Filters.GaussianFilter();
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
-        private void ñåïèÿToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ÑĞµĞ¿Ğ¸ÑToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters.Filter filter = new Filters.SepiaFilter();
             backgroundWorker1.RunWorkerAsync(filter);
