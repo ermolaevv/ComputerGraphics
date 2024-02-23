@@ -37,10 +37,12 @@ namespace Lab1
             точечныеToolStripMenuItem = new ToolStripMenuItem();
             инверсияToolStripMenuItem = new ToolStripMenuItem();
             grayScaleToolStripMenuItem = new ToolStripMenuItem();
+            увеличениеЯркостиToolStripMenuItem = new ToolStripMenuItem();
             сепияToolStripMenuItem = new ToolStripMenuItem();
             матричныеToolStripMenuItem = new ToolStripMenuItem();
             размытиеToolStripMenuItem = new ToolStripMenuItem();
             размытиеПоГауссуToolStripMenuItem = new ToolStripMenuItem();
+            собельToolStripMenuItem = new ToolStripMenuItem();
             тиснениеToolStripMenuItem = new ToolStripMenuItem();
             openFileDialog1 = new OpenFileDialog();
             saveFileDialog1 = new SaveFileDialog();
@@ -49,6 +51,7 @@ namespace Lab1
             progressBar1 = new ProgressBar();
             cancelButton = new Button();
             backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            резкостьматричнаяToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -59,7 +62,8 @@ namespace Lab1
             menuStrip1.Items.AddRange(new ToolStripItem[] { файлToolStripMenuItem, фильтрыToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1578, 33);
+            menuStrip1.Padding = new Padding(5, 2, 0, 2);
+            menuStrip1.Size = new Size(1262, 28);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -67,12 +71,13 @@ namespace Lab1
             // 
             файлToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openToolStripMenuItem, saveToolStripMenuItem, восстановитьToolStripMenuItem });
             файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            файлToolStripMenuItem.Size = new Size(69, 29);
+            файлToolStripMenuItem.Size = new Size(59, 24);
             файлToolStripMenuItem.Text = "Файл";
             // 
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
+            openToolStripMenuItem.Size = new Size(166, 26);
             openToolStripMenuItem.Size = new Size(224, 34);
             openToolStripMenuItem.Text = "Открыть";
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
@@ -82,6 +87,7 @@ namespace Lab1
             saveToolStripMenuItem.Enabled = false;
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             saveToolStripMenuItem.Size = new Size(224, 34);
+            saveToolStripMenuItem.Size = new Size(166, 26);
             saveToolStripMenuItem.Text = "Сохранить";
             saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
@@ -98,29 +104,37 @@ namespace Lab1
             фильтрыToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { точечныеToolStripMenuItem, матричныеToolStripMenuItem });
             фильтрыToolStripMenuItem.Enabled = false;
             фильтрыToolStripMenuItem.Name = "фильтрыToolStripMenuItem";
-            фильтрыToolStripMenuItem.Size = new Size(100, 29);
+            фильтрыToolStripMenuItem.Size = new Size(85, 24);
             фильтрыToolStripMenuItem.Text = "Фильтры";
             // 
             // точечныеToolStripMenuItem
             // 
-            точечныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { инверсияToolStripMenuItem, grayScaleToolStripMenuItem, сепияToolStripMenuItem });
+            точечныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { инверсияToolStripMenuItem, grayScaleToolStripMenuItem, увеличениеЯркостиToolStripMenuItem, сепияToolStripMenuItem });
             точечныеToolStripMenuItem.Name = "точечныеToolStripMenuItem";
+            точечныеToolStripMenuItem.Size = new Size(224, 26);
             точечныеToolStripMenuItem.Size = new Size(209, 34);
             точечныеToolStripMenuItem.Text = "Точечные";
             // 
             // инверсияToolStripMenuItem
             // 
             инверсияToolStripMenuItem.Name = "инверсияToolStripMenuItem";
-            инверсияToolStripMenuItem.Size = new Size(194, 34);
+            инверсияToolStripMenuItem.Size = new Size(235, 26);
             инверсияToolStripMenuItem.Text = "Инверсия";
             инверсияToolStripMenuItem.Click += инверсияToolStripMenuItem_Click;
             // 
             // grayScaleToolStripMenuItem
             // 
             grayScaleToolStripMenuItem.Name = "grayScaleToolStripMenuItem";
-            grayScaleToolStripMenuItem.Size = new Size(194, 34);
+            grayScaleToolStripMenuItem.Size = new Size(235, 26);
             grayScaleToolStripMenuItem.Text = "GrayScale";
             grayScaleToolStripMenuItem.Click += grayScaleToolStripMenuItem_Click;
+            // 
+            // увеличениеЯркостиToolStripMenuItem
+            // 
+            увеличениеЯркостиToolStripMenuItem.Name = "увеличениеЯркостиToolStripMenuItem";
+            увеличениеЯркостиToolStripMenuItem.Size = new Size(235, 26);
+            увеличениеЯркостиToolStripMenuItem.Text = "Увеличение яркости";
+            увеличениеЯркостиToolStripMenuItem.Click += увеличениеЯркостиToolStripMenuItem_Click;
             // 
             // сепияToolStripMenuItem
             // 
@@ -131,24 +145,31 @@ namespace Lab1
             // 
             // матричныеToolStripMenuItem
             // 
-            матричныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { размытиеToolStripMenuItem, размытиеПоГауссуToolStripMenuItem, тиснениеToolStripMenuItem });
+            матричныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { размытиеToolStripMenuItem, размытиеПоГауссуToolStripMenuItem, собельToolStripMenuItem, резкостьматричнаяToolStripMenuItem, тиснениеToolStripMenuItem });
             матричныеToolStripMenuItem.Name = "матричныеToolStripMenuItem";
-            матричныеToolStripMenuItem.Size = new Size(209, 34);
+            матричныеToolStripMenuItem.Size = new Size(224, 26);
             матричныеToolStripMenuItem.Text = "Матричные";
             // 
             // размытиеToolStripMenuItem
             // 
             размытиеToolStripMenuItem.Name = "размытиеToolStripMenuItem";
-            размытиеToolStripMenuItem.Size = new Size(275, 34);
+            размытиеToolStripMenuItem.Size = new Size(242, 26);
             размытиеToolStripMenuItem.Text = "Размытие";
             размытиеToolStripMenuItem.Click += размытиеToolStripMenuItem_Click;
             // 
             // размытиеПоГауссуToolStripMenuItem
             // 
             размытиеПоГауссуToolStripMenuItem.Name = "размытиеПоГауссуToolStripMenuItem";
-            размытиеПоГауссуToolStripMenuItem.Size = new Size(275, 34);
+            размытиеПоГауссуToolStripMenuItem.Size = new Size(242, 26);
             размытиеПоГауссуToolStripMenuItem.Text = "Размытие по Гауссу";
             размытиеПоГауссуToolStripMenuItem.Click += размытиеПоГауссуToolStripMenuItem_Click;
+            // 
+            // собельToolStripMenuItem
+            // 
+            собельToolStripMenuItem.Name = "собельToolStripMenuItem";
+            собельToolStripMenuItem.Size = new Size(242, 26);
+            собельToolStripMenuItem.Text = "Собель";
+            собельToolStripMenuItem.Click += собельToolStripMenuItem_Click;
             // 
             // тиснениеToolStripMenuItem
             // 
@@ -163,9 +184,10 @@ namespace Lab1
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(0, 36);
+            pictureBox1.Location = new Point(0, 29);
+            pictureBox1.Margin = new Padding(2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(1578, 649);
+            pictureBox1.Size = new Size(1262, 519);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
@@ -180,21 +202,30 @@ namespace Lab1
             // 
             // progressBar1
             // 
-            progressBar1.Location = new Point(12, 699);
+            progressBar1.Location = new Point(10, 559);
+            progressBar1.Margin = new Padding(2);
             progressBar1.Name = "progressBar1";
-            progressBar1.Size = new Size(1385, 35);
+            progressBar1.Size = new Size(1108, 28);
             progressBar1.TabIndex = 2;
             // 
             // cancelButton
             // 
             cancelButton.Enabled = false;
-            cancelButton.Location = new Point(1410, 698);
+            cancelButton.Location = new Point(1128, 558);
+            cancelButton.Margin = new Padding(2);
             cancelButton.Name = "cancelButton";
-            cancelButton.Size = new Size(153, 36);
+            cancelButton.Size = new Size(122, 29);
             cancelButton.TabIndex = 3;
             cancelButton.Text = "Отмена";
             cancelButton.UseVisualStyleBackColor = true;
             cancelButton.Click += cancelButton_Click;
+            // 
+            // резкостьматричнаяToolStripMenuItem
+            // 
+            резкостьматричнаяToolStripMenuItem.Name = "резкостьматричнаяToolStripMenuItem";
+            резкостьматричнаяToolStripMenuItem.Size = new Size(242, 26);
+            резкостьматричнаяToolStripMenuItem.Text = "Резкость (матричная)";
+            резкостьматричнаяToolStripMenuItem.Click += резкостьматричнаяToolStripMenuItem_Click;
             // 
             // backgroundWorker2
             // 
@@ -204,15 +235,16 @@ namespace Lab1
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1578, 744);
+            ClientSize = new Size(1262, 595);
             Controls.Add(cancelButton);
             Controls.Add(progressBar1);
             Controls.Add(pictureBox1);
             Controls.Add(menuStrip1);
             KeyPreview = true;
             MainMenuStrip = menuStrip1;
+            Margin = new Padding(2);
             Name = "Form1";
             Text = "Лабораторная работа 1";
             KeyDown += Form1_KeyDown;
@@ -242,6 +274,9 @@ namespace Lab1
         private ToolStripMenuItem grayScaleToolStripMenuItem;
         private ToolStripMenuItem размытиеToolStripMenuItem;
         private ToolStripMenuItem размытиеПоГауссуToolStripMenuItem;
+        private ToolStripMenuItem увеличениеЯркостиToolStripMenuItem;
+        private ToolStripMenuItem собельToolStripMenuItem;
+        private ToolStripMenuItem резкостьматричнаяToolStripMenuItem;
         private ToolStripMenuItem сепияToolStripMenuItem;
         private ToolStripMenuItem восстановитьToolStripMenuItem;
         private ToolStripMenuItem тиснениеToolStripMenuItem;

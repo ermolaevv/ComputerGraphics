@@ -1,3 +1,5 @@
+using Microsoft.VisualBasic;
+
 namespace Lab1
 {
     public partial class Form1 : Form
@@ -187,6 +189,25 @@ namespace Lab1
                 Thread.Sleep(200);
                 Application.DoEvents();
             }
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+        private void увеличениеЯркостиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string string_constant = Interaction.InputBox("Введите константу: ");
+            int string_To_Int_constant = Convert.ToInt32(string_constant);
+            Filters.Filter filter = new Filters.IncreaceBrightness(string_To_Int_constant);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void собельToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.SobelFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void резкостьматричнаяToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.MatrixSharpness();
             backgroundWorker1.RunWorkerAsync(filter);
         }
         #endregion
