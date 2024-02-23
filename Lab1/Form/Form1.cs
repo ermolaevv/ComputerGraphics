@@ -4,11 +4,15 @@ namespace Lab1
     {
         private static Bitmap src;
         private static Bitmap reference;
+        private static LinkedList<Bitmap> history;
+        private const int maxHistorySize = 10;
         public Form1()
         {
             InitializeComponent();
+            history = new LinkedList<Bitmap>();
         }
 
+        #region File
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "Image Files(*.BMP;*.JPG;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG|All files (*.*)|*.*";
@@ -43,21 +47,72 @@ namespace Lab1
                 pictureBox1.Image.Save(saveFileDialog1.FileName, System.Drawing.Imaging.ImageFormat.Png);
             }
         }
-
-        private void ËÌ‚ÂÒËˇToolStripMenuItem_Click(object sender, EventArgs e)
+        #endregion
+        private void ‚ÓÒÒÚ‡ÌÓ‚ËÚ¸ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters.Filter filter = new Filters.InvertFilter();
-            backgroundWorker1.RunWorkerAsync(filter);
+            updateHistory();
+            src = reference;
+            pictureBox1.Image = src;
+            pictureBox1.Refresh();
+        }
+        private void undo()
+        {
+            if (history.Count > 0)
+            {
+                src = history.Last();
+                history.RemoveLast();
+
+                pictureBox1.Image = src;
+                pictureBox1.Refresh();
+            }
+        }
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            cancelButton.Enabled = false;
+            backgroundWorker1.CancelAsync();
         }
 
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control)
+            {
+                switch(e.KeyCode)
+                {
+                    case Keys.S:
+                        saveToolStripMenuItem_Click(sender, e);
+                        break;
+                    case Keys.O:
+                        openToolStripMenuItem_Click(sender, e);
+                        break;
+                    case Keys.Z:
+                        undo();
+                        break;
+                    case Keys.R:
+                        ‚ÓÒÒÚ‡ÌÓ‚ËÚ¸ToolStripMenuItem_Click(sender, e);
+                        break;
+                }
+            }
+        }
+
+        #region BackgroundWorker
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             cancelButton.Enabled = true;
             Bitmap newImage = ((Filters.Filter)e.Argument).processImage(src, backgroundWorker1);
             if (!backgroundWorker1.CancellationPending)
             {
+                updateHistory();
+
                 src = newImage;
             }
+        }
+
+        private void updateHistory()
+        {
+            if (history.Count == maxHistorySize)
+                history.RemoveFirst();
+
+            history.AddLast(src);
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
@@ -75,13 +130,14 @@ namespace Lab1
             }
             progressBar1.Value = 0;
         }
+        #endregion
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        #region FilterItem_Click
+        private void ËÌ‚ÂÒËˇToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            cancelButton.Enabled = false;
-            backgroundWorker1.CancelAsync();
+            Filters.Filter filter = new Filters.InvertFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
         }
-
         private void grayScaleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters.Filter filter = new Filters.GrayScaleFilter();
@@ -105,12 +161,6 @@ namespace Lab1
             Filters.Filter filter = new Filters.SepiaFilter();
             backgroundWorker1.RunWorkerAsync(filter);
         }
-
-        private void ‚ÓÒÒÚ‡ÌÓ‚ËÚ¸ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            src = reference;
-            pictureBox1.Image = src;
-            pictureBox1.Refresh();
-        }
+        #endregion
     }
 }

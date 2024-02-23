@@ -199,6 +199,8 @@
             MainMenuStrip = menuStrip1;
             Name = "Form1";
             Text = "Лабораторная работа 1";
+            KeyPreview = true;
+            KeyDown += Form1_KeyDown;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
