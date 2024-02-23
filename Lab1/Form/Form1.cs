@@ -5,11 +5,17 @@ namespace Lab1
     public partial class Form1 : Form
     {
         private static Bitmap src;
+        private static Bitmap reference;
+        private static Bitmap newImage;
+        private static LinkedList<Bitmap> history;
+        private const int maxHistorySize = 10;
         public Form1()
         {
             InitializeComponent();
+            history = new LinkedList<Bitmap>();
         }
 
+        #region File
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "Image Files(*.BMP;*.JPG;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG|All files (*.*)|*.*";
@@ -19,8 +25,13 @@ namespace Lab1
             string filename = openFileDialog1.FileName;
 
             src = Service.CreateNonIndexedImage(new Bitmap(filename));
+            reference = src;
 
             pictureBox1.Image = src;
+
+            —Ñ–∏–ª—å—Ç—Ä—ãToolStripMenuItem.Enabled = true;
+            –≤–æ—Å—Å—Ç–∞–Ω–æ–≤–∏—Ç—åToolStripMenuItem.Enabled = true;
+            saveToolStripMenuItem.Enabled = true;
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -39,24 +50,78 @@ namespace Lab1
                 pictureBox1.Image.Save(saveFileDialog1.FileName, System.Drawing.Imaging.ImageFormat.Png);
             }
         }
+        #endregion
 
-        private void ËÌ‚ÂÒËˇToolStripMenuItem_Click(object sender, EventArgs e)
+        private void –≤–æ—Å—Å—Ç–∞–Ω–æ–≤–∏—Ç—åToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters.Filter filter = new Filters.InvertFilter();
-            backgroundWorker1.RunWorkerAsync(filter);
+            updateHistory();
+            src = reference;
+            pictureBox1.Image = src;
+            pictureBox1.Refresh();
         }
-
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void undo()
         {
-            cancelButton.Enabled = true;
-            Bitmap newImage = ((Filters.Filter)e.Argument).processImage(src, backgroundWorker1);
-            if (!backgroundWorker1.CancellationPending)
+            if (history.Count > 0)
             {
-                src = newImage;
+                src = history.Last();
+                history.RemoveLast();
+
+                pictureBox1.Image = src;
+                pictureBox1.Refresh();
             }
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.S:
+                        saveToolStripMenuItem_Click(sender, e);
+                        break;
+                    case Keys.O:
+                        openToolStripMenuItem_Click(sender, e);
+                        break;
+                    case Keys.Z:
+                        undo();
+                        break;
+                    case Keys.R:
+                        –≤–æ—Å—Å—Ç–∞–Ω–æ–≤–∏—Ç—åToolStripMenuItem_Click(sender, e);
+                        break;
+                }
+            }
+        }
+
+        #region BackgroundWorker
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.CancelAsync();
+        }
+        private void backgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            cancelButton.Enabled = true;
+
+            Bitmap processImage = ((Filters.Filter)e.Argument).processImage(src, backgroundWorker1);
+            if (!backgroundWorker1.CancellationPending)
+            {
+                newImage = processImage;
+            }
+            else
+            {
+                newImage = src;
+            }
+        }
+
+        private void updateHistory()
+        {
+            if (history.Count == maxHistorySize)
+                history.RemoveFirst();
+
+            history.AddLast(src);
+        }
+
+        private void backgroundWorker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
         }
@@ -65,55 +130,86 @@ namespace Lab1
         {
             if (!e.Cancelled)
             {
-                cancelButton.Enabled = false;
+                updateHistory();
+                src = newImage;
+
                 pictureBox1.Image = src;
                 pictureBox1.Refresh();
             }
+            cancelButton.Enabled = false;
             progressBar1.Value = 0;
         }
-
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void backgroundWorker2_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
+            src = newImage;
             cancelButton.Enabled = false;
-            backgroundWorker1.CancelAsync();
+            progressBar1.Value = 0;
         }
+        #endregion
 
+        #region FilterItem_Click
+        private void –∏–Ω–≤–µ—Ä—Å–∏—èToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.InvertFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
         private void grayScaleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters.Filter filter = new Filters.GrayScaleFilter();
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
-        private void ‡ÁÏ˚ÚËÂToolStripMenuItem_Click(object sender, EventArgs e)
+        private void —Ä–∞–∑–º—ã—Ç–∏–µToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters.Filter filter = new Filters.BlurFilter();
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
-        private void ‡ÁÏ˚ÚËÂœÓ√‡ÛÒÒÛToolStripMenuItem_Click(object sender, EventArgs e)
+        private void —Ä–∞–∑–º—ã—Ç–∏–µ–ü–æ–ì–∞—É—Å—Å—ÉToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters.Filter filter = new Filters.GaussianFilter();
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
-        private void Û‚ÂÎË˜ÂÌËÂﬂÍÓÒÚËToolStripMenuItem_Click(object sender, EventArgs e)
+        private void —Å–µ–ø–∏—èToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string string_constant = Interaction.InputBox("¬‚Â‰ËÚÂ ÍÓÌÒÚ‡ÌÚÛ: ");
+            Filters.Filter filter = new Filters.SepiaFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void —Ç–∏—Å–Ω–µ–Ω–∏–µToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.GrayScaleFilter();
+            backgroundWorker2.RunWorkerAsync(filter);
+
+            filter = new Filters.EmbossingFilter();
+
+            while (backgroundWorker2.IsBusy)
+            {
+                Thread.Sleep(200);
+                Application.DoEvents();
+            }
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+        private void —É–≤–µ–ª–∏—á–µ–Ω–∏–µ–Ø—Ä–∫–æ—Å—Ç–∏ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string string_constant = Interaction.InputBox("–í–≤–µ–¥–∏—Ç–µ –∫–æ–Ω—Å—Ç–∞–Ω—Ç—É: ");
             int string_To_Int_constant = Convert.ToInt32(string_constant);
             Filters.Filter filter = new Filters.IncreaceBrightness(string_To_Int_constant);
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
-        private void ÒÓ·ÂÎ¸ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void —Å–æ–±–µ–ª—åToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters.Filter filter = new Filters.SobelFilter();
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
-        private void ÂÁÍÓÒÚ¸Ï‡ÚË˜Ì‡ˇToolStripMenuItem_Click(object sender, EventArgs e)
+        private void —Ä–µ–∑–∫–æ—Å—Ç—å–º–∞—Ç—Ä–∏—á–Ω–∞—èToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters.Filter filter = new Filters.MatrixSharpness();
             backgroundWorker1.RunWorkerAsync(filter);
         }
+        #endregion
     }
 }

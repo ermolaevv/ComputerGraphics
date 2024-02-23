@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -38,6 +38,12 @@ namespace Lab1.Filters
                 return max;
             }
             return value;
+        }
+        protected int GetIntesity(Color sourceColor)
+        {
+            return (int)(0.299 * sourceColor.R +
+                                0.587 * sourceColor.G +
+                                0.114 * sourceColor.B);
         }
     }
 }
