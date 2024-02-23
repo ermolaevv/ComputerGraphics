@@ -1,3 +1,5 @@
+using Microsoft.VisualBasic;
+
 namespace Lab1
 {
     public partial class Form1 : Form
@@ -91,6 +93,26 @@ namespace Lab1
         private void ğàçìûòèåÏîÃàóññóToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters.Filter filter = new Filters.GaussianFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void óâåëè÷åíèåßğêîñòèToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string string_constant = Interaction.InputBox("Ââåäèòå êîíñòàíòó: ");
+            int string_To_Int_constant = Convert.ToInt32(string_constant);
+            Filters.Filter filter = new Filters.IncreaceBrightness(string_To_Int_constant);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void ñîáåëüToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.SobelFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void ğåçêîñòüìàòğè÷íàÿToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.MatrixSharpness();
             backgroundWorker1.RunWorkerAsync(filter);
         }
     }
