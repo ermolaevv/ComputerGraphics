@@ -4,6 +4,7 @@ namespace Lab1
     {
         private static Bitmap src;
         private static Bitmap reference;
+        private static Bitmap newImage;
         private static LinkedList<Bitmap> history;
         private const int maxHistorySize = 10;
         public Form1()
@@ -67,17 +68,12 @@ namespace Lab1
                 pictureBox1.Refresh();
             }
         }
-        private void cancelButton_Click(object sender, EventArgs e)
-        {
-            cancelButton.Enabled = false;
-            backgroundWorker1.CancelAsync();
-        }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control)
             {
-                switch(e.KeyCode)
+                switch (e.KeyCode)
                 {
                     case Keys.S:
                         saveToolStripMenuItem_Click(sender, e);
@@ -96,15 +92,22 @@ namespace Lab1
         }
 
         #region BackgroundWorker
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.CancelAsync();
+        }
+        private void backgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             cancelButton.Enabled = true;
-            Bitmap newImage = ((Filters.Filter)e.Argument).processImage(src, backgroundWorker1);
+
+            Bitmap processImage = ((Filters.Filter)e.Argument).processImage(src, backgroundWorker1);
             if (!backgroundWorker1.CancellationPending)
             {
-                updateHistory();
-
-                src = newImage;
+                newImage = processImage;
+            }
+            else
+            {
+                newImage = src;
             }
         }
 
@@ -116,7 +119,7 @@ namespace Lab1
             history.AddLast(src);
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void backgroundWorker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
         }
@@ -125,10 +128,19 @@ namespace Lab1
         {
             if (!e.Cancelled)
             {
-                cancelButton.Enabled = false;
+                updateHistory();
+                src = newImage;
+
                 pictureBox1.Image = src;
                 pictureBox1.Refresh();
             }
+            cancelButton.Enabled = false;
+            progressBar1.Value = 0;
+        }
+        private void backgroundWorker2_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            src = newImage;
+            cancelButton.Enabled = false;
             progressBar1.Value = 0;
         }
         #endregion
@@ -160,6 +172,21 @@ namespace Lab1
         private void сепияToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters.Filter filter = new Filters.SepiaFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void тиснениеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.GrayScaleFilter();
+            backgroundWorker2.RunWorkerAsync(filter);
+
+            filter = new Filters.EmbossingFilter();
+
+            while (backgroundWorker2.IsBusy)
+            {
+                Thread.Sleep(200);
+                Application.DoEvents();
+            }
             backgroundWorker1.RunWorkerAsync(filter);
         }
         #endregion
