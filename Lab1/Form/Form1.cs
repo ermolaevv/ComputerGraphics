@@ -105,7 +105,7 @@ namespace Lab1
         }
         private void backgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            cancelButton.Enabled = true;
+            //cancelButton.Enabled = true;
 
             Bitmap processImage = ((Filters.Filter)e.Argument).processImage(src, backgroundWorker1);
             if (!backgroundWorker1.CancellationPending)
@@ -266,9 +266,15 @@ namespace Lab1
 
         private void коррекцияСОпорнымЦветомToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters.Filter filter = new Filters.ReferenceColorCorrection(Color.FromArgb(123,45,62), Color.FromArgb(163, 120, 180));
+            Filters.Filter filter = new Filters.ReferenceColorCorrection(Color.FromArgb(123, 45, 62), Color.FromArgb(163, 120, 180));
             backgroundWorker1.RunWorkerAsync(filter);
         }
         #endregion
+
+        private void медианныйФильтрToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.MedianFilter(5);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
     }
 }
