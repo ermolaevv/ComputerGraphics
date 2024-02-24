@@ -44,8 +44,10 @@ namespace Lab1
             серыйМирToolStripMenuItem = new ToolStripMenuItem();
             идеальныйОтражательToolStripMenuItem = new ToolStripMenuItem();
             линейнаяКоррекцияToolStripMenuItem = new ToolStripMenuItem();
+            коррекцияСОпорнымЦветомToolStripMenuItem = new ToolStripMenuItem();
             волны1ToolStripMenuItem = new ToolStripMenuItem();
             волны2ToolStripMenuItem = new ToolStripMenuItem();
+            стеклоToolStripMenuItem = new ToolStripMenuItem();
             матричныеToolStripMenuItem = new ToolStripMenuItem();
             размытиеToolStripMenuItem = new ToolStripMenuItem();
             размытиеПоГауссуToolStripMenuItem = new ToolStripMenuItem();
@@ -56,15 +58,16 @@ namespace Lab1
             резкость2ToolStripMenuItem = new ToolStripMenuItem();
             щерраToolStripMenuItem = new ToolStripMenuItem();
             прюToolStripMenuItem = new ToolStripMenuItem();
+            медианныйФильтрToolStripMenuItem = new ToolStripMenuItem();
+            фильтрминимумToolStripMenuItem = new ToolStripMenuItem();
+            фильтрМаксмимумToolStripMenuItem = new ToolStripMenuItem();
+            светящиесяКраяToolStripMenuItem = new ToolStripMenuItem();
             openFileDialog1 = new OpenFileDialog();
             saveFileDialog1 = new SaveFileDialog();
             pictureBox1 = new PictureBox();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             progressBar1 = new ProgressBar();
             cancelButton = new Button();
-            backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
-            коррекцияСОпорнымЦветомToolStripMenuItem = new ToolStripMenuItem();
-            стеклоToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -90,7 +93,6 @@ namespace Lab1
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
             openToolStripMenuItem.Size = new Size(224, 34);
-            openToolStripMenuItem.Size = new Size(187, 26);
             openToolStripMenuItem.Text = "Открыть";
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
@@ -106,7 +108,7 @@ namespace Lab1
             // 
             восстановитьToolStripMenuItem.Enabled = false;
             восстановитьToolStripMenuItem.Name = "восстановитьToolStripMenuItem";
-            восстановитьToolStripMenuItem.Size = new Size(187, 26);
+            восстановитьToolStripMenuItem.Size = new Size(224, 34);
             восстановитьToolStripMenuItem.Text = "Восстановить";
             восстановитьToolStripMenuItem.Click += восстановитьToolStripMenuItem_Click;
             // 
@@ -123,7 +125,6 @@ namespace Lab1
             точечныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { инверсияToolStripMenuItem, grayScaleToolStripMenuItem, увеличениеЯркостиToolStripMenuItem, сепияToolStripMenuItem, переносToolStripMenuItem, поворотToolStripMenuItem, серыйМирToolStripMenuItem, идеальныйОтражательToolStripMenuItem, линейнаяКоррекцияToolStripMenuItem, коррекцияСОпорнымЦветомToolStripMenuItem, волны1ToolStripMenuItem, волны2ToolStripMenuItem, стеклоToolStripMenuItem });
             точечныеToolStripMenuItem.Name = "точечныеToolStripMenuItem";
             точечныеToolStripMenuItem.Size = new Size(270, 34);
-            точечныеToolStripMenuItem.Size = new Size(224, 26);
             точечныеToolStripMenuItem.Text = "Точечные";
             // 
             // инверсияToolStripMenuItem
@@ -151,7 +152,6 @@ namespace Lab1
             // 
             сепияToolStripMenuItem.Name = "сепияToolStripMenuItem";
             сепияToolStripMenuItem.Size = new Size(368, 34);
-            сепияToolStripMenuItem.Size = new Size(235, 26);
             сепияToolStripMenuItem.Text = "Сепия";
             сепияToolStripMenuItem.Click += сепияToolStripMenuItem_Click;
             // 
@@ -190,23 +190,37 @@ namespace Lab1
             линейнаяКоррекцияToolStripMenuItem.Text = "Линейная коррекция";
             линейнаяКоррекцияToolStripMenuItem.Click += линейнаяКоррекцияToolStripMenuItem_Click;
             // 
+            // коррекцияСОпорнымЦветомToolStripMenuItem
+            // 
+            коррекцияСОпорнымЦветомToolStripMenuItem.Name = "коррекцияСОпорнымЦветомToolStripMenuItem";
+            коррекцияСОпорнымЦветомToolStripMenuItem.Size = new Size(368, 34);
+            коррекцияСОпорнымЦветомToolStripMenuItem.Text = "Коррекция с опорным цветом";
+            коррекцияСОпорнымЦветомToolStripMenuItem.Click += коррекцияСОпорнымЦветомToolStripMenuItem_Click;
+            // 
             // волны1ToolStripMenuItem
             // 
             волны1ToolStripMenuItem.Name = "волны1ToolStripMenuItem";
-            волны1ToolStripMenuItem.Size = new Size(235, 26);
+            волны1ToolStripMenuItem.Size = new Size(368, 34);
             волны1ToolStripMenuItem.Text = "Волны 1";
             волны1ToolStripMenuItem.Click += волны1ToolStripMenuItem_Click;
             // 
             // волны2ToolStripMenuItem
             // 
             волны2ToolStripMenuItem.Name = "волны2ToolStripMenuItem";
-            волны2ToolStripMenuItem.Size = new Size(235, 26);
+            волны2ToolStripMenuItem.Size = new Size(368, 34);
             волны2ToolStripMenuItem.Text = "Волны 2";
             волны2ToolStripMenuItem.Click += волны2ToolStripMenuItem_Click;
             // 
+            // стеклоToolStripMenuItem
+            // 
+            стеклоToolStripMenuItem.Name = "стеклоToolStripMenuItem";
+            стеклоToolStripMenuItem.Size = new Size(368, 34);
+            стеклоToolStripMenuItem.Text = "Стекло";
+            стеклоToolStripMenuItem.Click += стеклоToolStripMenuItem_Click;
+            // 
             // матричныеToolStripMenuItem
             // 
-            матричныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { размытиеToolStripMenuItem, размытиеПоГауссуToolStripMenuItem, собельToolStripMenuItem, резкостьматричнаяToolStripMenuItem, тиснениеToolStripMenuItem, motionBlurToolStripMenuItem, резкость2ToolStripMenuItem, щерраToolStripMenuItem, прюToolStripMenuItem });
+            матричныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { размытиеToolStripMenuItem, размытиеПоГауссуToolStripMenuItem, собельToolStripMenuItem, резкостьматричнаяToolStripMenuItem, тиснениеToolStripMenuItem, motionBlurToolStripMenuItem, резкость2ToolStripMenuItem, щерраToolStripMenuItem, прюToolStripMenuItem, медианныйФильтрToolStripMenuItem, фильтрминимумToolStripMenuItem, фильтрМаксмимумToolStripMenuItem, светящиесяКраяToolStripMenuItem });
             матричныеToolStripMenuItem.Name = "матричныеToolStripMenuItem";
             матричныеToolStripMenuItem.Size = new Size(270, 34);
             матричныеToolStripMenuItem.Text = "Матричные";
@@ -214,66 +228,93 @@ namespace Lab1
             // размытиеToolStripMenuItem
             // 
             размытиеToolStripMenuItem.Name = "размытиеToolStripMenuItem";
-            размытиеToolStripMenuItem.Size = new Size(288, 34);
-            размытиеToolStripMenuItem.Size = new Size(229, 26);
+            размытиеToolStripMenuItem.Size = new Size(280, 34);
             размытиеToolStripMenuItem.Text = "Размытие";
             размытиеToolStripMenuItem.Click += размытиеToolStripMenuItem_Click;
             // 
             // размытиеПоГауссуToolStripMenuItem
             // 
             размытиеПоГауссуToolStripMenuItem.Name = "размытиеПоГауссуToolStripMenuItem";
-            размытиеПоГауссуToolStripMenuItem.Size = new Size(288, 34);
+            размытиеПоГауссуToolStripMenuItem.Size = new Size(280, 34);
             размытиеПоГауссуToolStripMenuItem.Text = "Размытие по Гауссу";
             размытиеПоГауссуToolStripMenuItem.Click += размытиеПоГауссуToolStripMenuItem_Click;
             // 
             // собельToolStripMenuItem
             // 
             собельToolStripMenuItem.Name = "собельToolStripMenuItem";
-            собельToolStripMenuItem.Size = new Size(288, 34);
+            собельToolStripMenuItem.Size = new Size(280, 34);
             собельToolStripMenuItem.Text = "Собель";
             собельToolStripMenuItem.Click += собельToolStripMenuItem_Click;
             // 
             // резкостьматричнаяToolStripMenuItem
             // 
             резкостьматричнаяToolStripMenuItem.Name = "резкостьматричнаяToolStripMenuItem";
-            резкостьматричнаяToolStripMenuItem.Size = new Size(229, 26);
+            резкостьматричнаяToolStripMenuItem.Size = new Size(280, 34);
             резкостьматричнаяToolStripMenuItem.Text = "Резкость 1";
             резкостьматричнаяToolStripMenuItem.Click += резкостьматричнаяToolStripMenuItem_Click;
             // 
             // тиснениеToolStripMenuItem
             // 
             тиснениеToolStripMenuItem.Name = "тиснениеToolStripMenuItem";
-            тиснениеToolStripMenuItem.Size = new Size(288, 34);
+            тиснениеToolStripMenuItem.Size = new Size(280, 34);
             тиснениеToolStripMenuItem.Text = "Тиснение";
             тиснениеToolStripMenuItem.Click += тиснениеToolStripMenuItem_Click;
+            // 
+            // motionBlurToolStripMenuItem
+            // 
+            motionBlurToolStripMenuItem.Name = "motionBlurToolStripMenuItem";
+            motionBlurToolStripMenuItem.Size = new Size(280, 34);
+            motionBlurToolStripMenuItem.Text = "Motion Blur";
+            motionBlurToolStripMenuItem.Click += motionBlurToolStripMenuItem_Click;
             // 
             // резкость2ToolStripMenuItem
             // 
             резкость2ToolStripMenuItem.Name = "резкость2ToolStripMenuItem";
-            резкость2ToolStripMenuItem.Size = new Size(229, 26);
+            резкость2ToolStripMenuItem.Size = new Size(280, 34);
             резкость2ToolStripMenuItem.Text = "Резкость 2";
             резкость2ToolStripMenuItem.Click += резкость2ToolStripMenuItem_Click;
             // 
             // щерраToolStripMenuItem
             // 
             щерраToolStripMenuItem.Name = "щерраToolStripMenuItem";
-            щерраToolStripMenuItem.Size = new Size(229, 26);
+            щерраToolStripMenuItem.Size = new Size(280, 34);
             щерраToolStripMenuItem.Text = "Щерра";
             щерраToolStripMenuItem.Click += щерраToolStripMenuItem_Click;
             // 
             // прюToolStripMenuItem
             // 
             прюToolStripMenuItem.Name = "прюToolStripMenuItem";
-            прюToolStripMenuItem.Size = new Size(229, 26);
+            прюToolStripMenuItem.Size = new Size(280, 34);
             прюToolStripMenuItem.Text = "Прюитт";
             прюToolStripMenuItem.Click += прюToolStripMenuItem_Click;
             // 
-            // motionBlurToolStripMenuItem
+            // медианныйФильтрToolStripMenuItem
             // 
-            motionBlurToolStripMenuItem.Name = "motionBlurToolStripMenuItem";
-            motionBlurToolStripMenuItem.Size = new Size(288, 34);
-            motionBlurToolStripMenuItem.Text = "Motion Blur";
-            motionBlurToolStripMenuItem.Click += motionBlurToolStripMenuItem_Click;
+            медианныйФильтрToolStripMenuItem.Name = "медианныйФильтрToolStripMenuItem";
+            медианныйФильтрToolStripMenuItem.Size = new Size(280, 34);
+            медианныйФильтрToolStripMenuItem.Text = "Медианный фильтр";
+            медианныйФильтрToolStripMenuItem.Click += медианныйФильтрToolStripMenuItem_Click;
+            // 
+            // фильтрминимумToolStripMenuItem
+            // 
+            фильтрминимумToolStripMenuItem.Name = "фильтрминимумToolStripMenuItem";
+            фильтрминимумToolStripMenuItem.Size = new Size(280, 34);
+            фильтрминимумToolStripMenuItem.Text = "Фильтр «минимум»";
+            фильтрминимумToolStripMenuItem.Click += фильтрминимумToolStripMenuItem_Click;
+            // 
+            // фильтрМаксмимумToolStripMenuItem
+            // 
+            фильтрМаксмимумToolStripMenuItem.Name = "фильтрМаксмимумToolStripMenuItem";
+            фильтрМаксмимумToolStripMenuItem.Size = new Size(280, 34);
+            фильтрМаксмимумToolStripMenuItem.Text = "Фильтр «максимум»";
+            фильтрМаксмимумToolStripMenuItem.Click += фильтрМаксмимумToolStripMenuItem_Click;
+            // 
+            // светящиесяКраяToolStripMenuItem
+            // 
+            светящиесяКраяToolStripMenuItem.Name = "светящиесяКраяToolStripMenuItem";
+            светящиесяКраяToolStripMenuItem.Size = new Size(280, 34);
+            светящиесяКраяToolStripMenuItem.Text = "Светящиеся края";
+            светящиесяКраяToolStripMenuItem.Click += светящиесяКраяToolStripMenuItem_Click;
             // 
             // openFileDialog1
             // 
@@ -316,28 +357,6 @@ namespace Lab1
             cancelButton.Text = "Отмена";
             cancelButton.UseVisualStyleBackColor = true;
             cancelButton.Click += cancelButton_Click;
-            // 
-            // backgroundWorker2
-            // 
-            backgroundWorker2.WorkerReportsProgress = true;
-            backgroundWorker2.WorkerSupportsCancellation = true;
-            backgroundWorker2.DoWork += backgroundWorker_DoWork;
-            backgroundWorker2.ProgressChanged += backgroundWorker_ProgressChanged;
-            backgroundWorker2.RunWorkerCompleted += backgroundWorker2_RunWorkerCompleted;
-            // 
-            // коррекцияСОпорнымЦветомToolStripMenuItem
-            // 
-            коррекцияСОпорнымЦветомToolStripMenuItem.Name = "коррекцияСОпорнымЦветомToolStripMenuItem";
-            коррекцияСОпорнымЦветомToolStripMenuItem.Size = new Size(368, 34);
-            коррекцияСОпорнымЦветомToolStripMenuItem.Text = "Коррекция с опорным цветом";
-            коррекцияСОпорнымЦветомToolStripMenuItem.Click += коррекцияСОпорнымЦветомToolStripMenuItem_Click;
-            // 
-            // стеклоToolStripMenuItem
-            // 
-            стеклоToolStripMenuItem.Name = "стеклоToolStripMenuItem";
-            стеклоToolStripMenuItem.Size = new Size(235, 26);
-            стеклоToolStripMenuItem.Text = "Стекло";
-            стеклоToolStripMenuItem.Click += стеклоToolStripMenuItem_Click;
             // 
             // Form1
             // 
@@ -386,7 +405,6 @@ namespace Lab1
         private ToolStripMenuItem сепияToolStripMenuItem;
         private ToolStripMenuItem восстановитьToolStripMenuItem;
         private ToolStripMenuItem тиснениеToolStripMenuItem;
-        private System.ComponentModel.BackgroundWorker backgroundWorker2;
         private ToolStripMenuItem motionBlurToolStripMenuItem;
         private ToolStripMenuItem переносToolStripMenuItem;
         private ToolStripMenuItem поворотToolStripMenuItem;
@@ -394,11 +412,15 @@ namespace Lab1
         private ToolStripMenuItem идеальныйОтражательToolStripMenuItem;
         private ToolStripMenuItem линейнаяКоррекцияToolStripMenuItem;
         private ToolStripMenuItem коррекцияСОпорнымЦветомToolStripMenuItem;
+        private ToolStripMenuItem медианныйФильтрToolStripMenuItem;
         private ToolStripMenuItem резкость2ToolStripMenuItem;
         private ToolStripMenuItem щерраToolStripMenuItem;
         private ToolStripMenuItem прюToolStripMenuItem;
         private ToolStripMenuItem волны1ToolStripMenuItem;
         private ToolStripMenuItem волны2ToolStripMenuItem;
         private ToolStripMenuItem стеклоToolStripMenuItem;
+        private ToolStripMenuItem светящиесяКраяToolStripMenuItem;
+        private ToolStripMenuItem фильтрМаксмимумToolStripMenuItem;
+        private ToolStripMenuItem фильтрминимумToolStripMenuItem;
     }
 }
