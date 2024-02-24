@@ -312,10 +312,18 @@ namespace Lab1
             Filters.Filter filter = new Filters.MedianFilter(5);
             backgroundWorker1.RunWorkerAsync(filter);
         }
+
         private void фильтрМаксмимумToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters.Filter filter = new Filters.MaximumFilter(5);
             backgroundWorker1.RunWorkerAsync(filter);
         }
+
+        private void фильтрминимумToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.MinimumFilter(5);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+        #endregion
     }
 }

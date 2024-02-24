@@ -57,6 +57,7 @@ namespace Lab1
             резкость2ToolStripMenuItem = new ToolStripMenuItem();
             щерраToolStripMenuItem = new ToolStripMenuItem();
             прюToolStripMenuItem = new ToolStripMenuItem();
+            фильтрминимумToolStripMenuItem = new ToolStripMenuItem();
             фильтрМаксмимумToolStripMenuItem = new ToolStripMenuItem();
             openFileDialog1 = new OpenFileDialog();
             saveFileDialog1 = new SaveFileDialog();
@@ -279,6 +280,13 @@ namespace Lab1
             прюToolStripMenuItem.Click += прюToolStripMenuItem_Click;
             // 
             // 
+            // фильтрминимумToolStripMenuItem
+            // 
+            фильтрминимумToolStripMenuItem.Name = "фильтрминимумToolStripMenuItem";
+            фильтрминимумToolStripMenuItem.Size = new Size(280, 34);
+            фильтрминимумToolStripMenuItem.Text = "Фильтр «минимум»";
+            фильтрминимумToolStripMenuItem.Click += фильтрминимумToolStripMenuItem_Click;
+            // 
             // фильтрМаксмимумToolStripMenuItem
             // 
             фильтрМаксмимумToolStripMenuItem.Name = "фильтрМаксмимумToolStripMenuItem";
@@ -413,5 +421,6 @@ namespace Lab1
         private ToolStripMenuItem волны2ToolStripMenuItem;
         private ToolStripMenuItem стеклоToolStripMenuItem;
         private ToolStripMenuItem фильтрМаксмимумToolStripMenuItem;
+        private ToolStripMenuItem фильтрминимумToolStripMenuItem;
     }
 }
