@@ -233,10 +233,16 @@ namespace Lab1
             Filters.Filter filter = new Filters.MotionBlur();
             backgroundWorker1.RunWorkerAsync(filter);
         }
-        
+
         private void переносToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters.Filter filter = new Filters.Transfer();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void поворотToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.Rotation();
             backgroundWorker1.RunWorkerAsync(filter);
         }
         #endregion

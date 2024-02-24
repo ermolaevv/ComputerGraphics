@@ -40,6 +40,7 @@ namespace Lab1
             увеличениеЯркостиToolStripMenuItem = new ToolStripMenuItem();
             сепияToolStripMenuItem = new ToolStripMenuItem();
             переносToolStripMenuItem = new ToolStripMenuItem();
+            поворотToolStripMenuItem = new ToolStripMenuItem();
             матричныеToolStripMenuItem = new ToolStripMenuItem();
             размытиеToolStripMenuItem = new ToolStripMenuItem();
             размытиеПоГауссуToolStripMenuItem = new ToolStripMenuItem();
@@ -108,9 +109,9 @@ namespace Lab1
             // 
             // точечныеToolStripMenuItem
             // 
-            точечныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { инверсияToolStripMenuItem, grayScaleToolStripMenuItem, увеличениеЯркостиToolStripMenuItem, сепияToolStripMenuItem, переносToolStripMenuItem });
+            точечныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { инверсияToolStripMenuItem, grayScaleToolStripMenuItem, увеличениеЯркостиToolStripMenuItem, сепияToolStripMenuItem, переносToolStripMenuItem, поворотToolStripMenuItem });
             точечныеToolStripMenuItem.Name = "точечныеToolStripMenuItem";
-            точечныеToolStripMenuItem.Size = new Size(270, 34);
+            точечныеToolStripMenuItem.Size = new Size(209, 34);
             точечныеToolStripMenuItem.Text = "Точечные";
             // 
             // инверсияToolStripMenuItem
@@ -148,11 +149,18 @@ namespace Lab1
             переносToolStripMenuItem.Text = "Перенос";
             переносToolStripMenuItem.Click += переносToolStripMenuItem_Click;
             // 
+            // поворотToolStripMenuItem
+            // 
+            поворотToolStripMenuItem.Name = "поворотToolStripMenuItem";
+            поворотToolStripMenuItem.Size = new Size(280, 34);
+            поворотToolStripMenuItem.Text = "Поворот";
+            поворотToolStripMenuItem.Click += поворотToolStripMenuItem_Click;
+            // 
             // матричныеToolStripMenuItem
             // 
             матричныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { размытиеToolStripMenuItem, размытиеПоГауссуToolStripMenuItem, собельToolStripMenuItem, резкостьматричнаяToolStripMenuItem, тиснениеToolStripMenuItem, motionBlurToolStripMenuItem });
             матричныеToolStripMenuItem.Name = "матричныеToolStripMenuItem";
-            матричныеToolStripMenuItem.Size = new Size(270, 34);
+            матричныеToolStripMenuItem.Size = new Size(209, 34);
             матричныеToolStripMenuItem.Text = "Матричные";
             // 
             // размытиеToolStripMenuItem
@@ -297,5 +305,6 @@ namespace Lab1
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
         private ToolStripMenuItem motionBlurToolStripMenuItem;
         private ToolStripMenuItem переносToolStripMenuItem;
+        private ToolStripMenuItem поворотToolStripMenuItem;
     }
 }
