@@ -217,5 +217,11 @@ namespace Lab1
             Filters.Filter filter = new Filters.MatrixSharpness_2();
             backgroundWorker1.RunWorkerAsync(filter);
         }
+
+        private void щерраToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.SharraFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
     }
 }
