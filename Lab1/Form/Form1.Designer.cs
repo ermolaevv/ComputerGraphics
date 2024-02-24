@@ -57,6 +57,7 @@ namespace Lab1
             резкость2ToolStripMenuItem = new ToolStripMenuItem();
             щерраToolStripMenuItem = new ToolStripMenuItem();
             прюToolStripMenuItem = new ToolStripMenuItem();
+            фильтрМаксмимумToolStripMenuItem = new ToolStripMenuItem();
             openFileDialog1 = new OpenFileDialog();
             saveFileDialog1 = new SaveFileDialog();
             pictureBox1 = new PictureBox();
@@ -215,7 +216,7 @@ namespace Lab1
             // 
             // матричныеToolStripMenuItem
             // 
-            матричныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { размытиеToolStripMenuItem, размытиеПоГауссуToolStripMenuItem, собельToolStripMenuItem, резкостьматричнаяToolStripMenuItem, тиснениеToolStripMenuItem, motionBlurToolStripMenuItem, резкость2ToolStripMenuItem, щерраToolStripMenuItem, прюToolStripMenuItem, медианныйФильтрToolStripMenuItem });
+            матричныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { размытиеToolStripMenuItem, размытиеПоГауссуToolStripMenuItem, собельToolStripMenuItem, резкостьматричнаяToolStripMenuItem, тиснениеToolStripMenuItem, motionBlurToolStripMenuItem, резкость2ToolStripMenuItem, щерраToolStripMenuItem, прюToolStripMenuItem, медианныйФильтрToolStripMenuItem, фильтрминимумToolStripMenuItem, фильтрМаксмимумToolStripMenuItem, светящиесяКраяToolStripMenuItem });
             матричныеToolStripMenuItem.Name = "матричныеToolStripMenuItem";
             матричныеToolStripMenuItem.Size = new Size(270, 34);
             матричныеToolStripMenuItem.Text = "Матричные";
@@ -277,12 +278,13 @@ namespace Lab1
             прюToolStripMenuItem.Text = "Прюитт";
             прюToolStripMenuItem.Click += прюToolStripMenuItem_Click;
             // 
-            // motionBlurToolStripMenuItem
             // 
-            motionBlurToolStripMenuItem.Name = "motionBlurToolStripMenuItem";
-            motionBlurToolStripMenuItem.Size = new Size(288, 34);
-            motionBlurToolStripMenuItem.Text = "Motion Blur";
-            motionBlurToolStripMenuItem.Click += motionBlurToolStripMenuItem_Click;
+            // фильтрМаксмимумToolStripMenuItem
+            // 
+            фильтрМаксмимумToolStripMenuItem.Name = "фильтрМаксмимумToolStripMenuItem";
+            фильтрМаксмимумToolStripMenuItem.Size = new Size(280, 34);
+            фильтрМаксмимумToolStripMenuItem.Text = "Фильтр «максимум»";
+            фильтрМаксмимумToolStripMenuItem.Click += фильтрМаксмимумToolStripMenuItem_Click;
             // 
             // openFileDialog1
             // 
@@ -410,5 +412,6 @@ namespace Lab1
         private ToolStripMenuItem волны1ToolStripMenuItem;
         private ToolStripMenuItem волны2ToolStripMenuItem;
         private ToolStripMenuItem стеклоToolStripMenuItem;
+        private ToolStripMenuItem фильтрМаксмимумToolStripMenuItem;
     }
 }
