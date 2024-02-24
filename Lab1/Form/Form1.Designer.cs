@@ -39,6 +39,7 @@ namespace Lab1
             grayScaleToolStripMenuItem = new ToolStripMenuItem();
             увеличениеЯркостиToolStripMenuItem = new ToolStripMenuItem();
             сепияToolStripMenuItem = new ToolStripMenuItem();
+            волны1ToolStripMenuItem = new ToolStripMenuItem();
             матричныеToolStripMenuItem = new ToolStripMenuItem();
             размытиеToolStripMenuItem = new ToolStripMenuItem();
             размытиеПоГауссуToolStripMenuItem = new ToolStripMenuItem();
@@ -55,7 +56,7 @@ namespace Lab1
             progressBar1 = new ProgressBar();
             cancelButton = new Button();
             backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
-            волны1ToolStripMenuItem = new ToolStripMenuItem();
+            волны2ToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -81,7 +82,7 @@ namespace Lab1
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(224, 26);
+            openToolStripMenuItem.Size = new Size(187, 26);
             openToolStripMenuItem.Text = "Открыть";
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
@@ -89,7 +90,7 @@ namespace Lab1
             // 
             saveToolStripMenuItem.Enabled = false;
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(224, 26);
+            saveToolStripMenuItem.Size = new Size(187, 26);
             saveToolStripMenuItem.Text = "Сохранить";
             saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
@@ -97,7 +98,7 @@ namespace Lab1
             // 
             восстановитьToolStripMenuItem.Enabled = false;
             восстановитьToolStripMenuItem.Name = "восстановитьToolStripMenuItem";
-            восстановитьToolStripMenuItem.Size = new Size(224, 26);
+            восстановитьToolStripMenuItem.Size = new Size(187, 26);
             восстановитьToolStripMenuItem.Text = "Восстановить";
             восстановитьToolStripMenuItem.Click += восстановитьToolStripMenuItem_Click;
             // 
@@ -111,7 +112,7 @@ namespace Lab1
             // 
             // точечныеToolStripMenuItem
             // 
-            точечныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { инверсияToolStripMenuItem, grayScaleToolStripMenuItem, увеличениеЯркостиToolStripMenuItem, сепияToolStripMenuItem, волны1ToolStripMenuItem });
+            точечныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { инверсияToolStripMenuItem, grayScaleToolStripMenuItem, увеличениеЯркостиToolStripMenuItem, сепияToolStripMenuItem, волны1ToolStripMenuItem, волны2ToolStripMenuItem });
             точечныеToolStripMenuItem.Name = "точечныеToolStripMenuItem";
             точечныеToolStripMenuItem.Size = new Size(224, 26);
             точечныеToolStripMenuItem.Text = "Точечные";
@@ -143,6 +144,13 @@ namespace Lab1
             сепияToolStripMenuItem.Size = new Size(235, 26);
             сепияToolStripMenuItem.Text = "Сепия";
             сепияToolStripMenuItem.Click += сепияToolStripMenuItem_Click;
+            // 
+            // волны1ToolStripMenuItem
+            // 
+            волны1ToolStripMenuItem.Name = "волны1ToolStripMenuItem";
+            волны1ToolStripMenuItem.Size = new Size(235, 26);
+            волны1ToolStripMenuItem.Text = "Волны 1";
+            волны1ToolStripMenuItem.Click += волны1ToolStripMenuItem_Click;
             // 
             // матричныеToolStripMenuItem
             // 
@@ -255,12 +263,12 @@ namespace Lab1
             backgroundWorker2.ProgressChanged += backgroundWorker_ProgressChanged;
             backgroundWorker2.RunWorkerCompleted += backgroundWorker2_RunWorkerCompleted;
             // 
-            // волны1ToolStripMenuItem
+            // волны2ToolStripMenuItem
             // 
-            волны1ToolStripMenuItem.Name = "волны1ToolStripMenuItem";
-            волны1ToolStripMenuItem.Size = new Size(235, 26);
-            волны1ToolStripMenuItem.Text = "Волны 1";
-            волны1ToolStripMenuItem.Click += волны1ToolStripMenuItem_Click;
+            волны2ToolStripMenuItem.Name = "волны2ToolStripMenuItem";
+            волны2ToolStripMenuItem.Size = new Size(235, 26);
+            волны2ToolStripMenuItem.Text = "Волны 2";
+            волны2ToolStripMenuItem.Click += волны2ToolStripMenuItem_Click;
             // 
             // Form1
             // 
@@ -314,5 +322,6 @@ namespace Lab1
         private ToolStripMenuItem щерраToolStripMenuItem;
         private ToolStripMenuItem прюToolStripMenuItem;
         private ToolStripMenuItem волны1ToolStripMenuItem;
+        private ToolStripMenuItem волны2ToolStripMenuItem;
     }
 }
