@@ -55,6 +55,7 @@ namespace Lab1
             progressBar1 = new ProgressBar();
             cancelButton = new Button();
             backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            серыйМирToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -79,7 +80,7 @@ namespace Lab1
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(224, 34);
+            openToolStripMenuItem.Size = new Size(270, 34);
             openToolStripMenuItem.Text = "Открыть";
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
@@ -87,7 +88,7 @@ namespace Lab1
             // 
             saveToolStripMenuItem.Enabled = false;
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(224, 34);
+            saveToolStripMenuItem.Size = new Size(270, 34);
             saveToolStripMenuItem.Text = "Сохранить";
             saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
@@ -95,7 +96,7 @@ namespace Lab1
             // 
             восстановитьToolStripMenuItem.Enabled = false;
             восстановитьToolStripMenuItem.Name = "восстановитьToolStripMenuItem";
-            восстановитьToolStripMenuItem.Size = new Size(224, 34);
+            восстановитьToolStripMenuItem.Size = new Size(270, 34);
             восстановитьToolStripMenuItem.Text = "Восстановить";
             восстановитьToolStripMenuItem.Click += восстановитьToolStripMenuItem_Click;
             // 
@@ -109,9 +110,9 @@ namespace Lab1
             // 
             // точечныеToolStripMenuItem
             // 
-            точечныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { инверсияToolStripMenuItem, grayScaleToolStripMenuItem, увеличениеЯркостиToolStripMenuItem, сепияToolStripMenuItem, переносToolStripMenuItem, поворотToolStripMenuItem });
+            точечныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { инверсияToolStripMenuItem, grayScaleToolStripMenuItem, увеличениеЯркостиToolStripMenuItem, сепияToolStripMenuItem, переносToolStripMenuItem, поворотToolStripMenuItem, серыйМирToolStripMenuItem });
             точечныеToolStripMenuItem.Name = "точечныеToolStripMenuItem";
-            точечныеToolStripMenuItem.Size = new Size(209, 34);
+            точечныеToolStripMenuItem.Size = new Size(270, 34);
             точечныеToolStripMenuItem.Text = "Точечные";
             // 
             // инверсияToolStripMenuItem
@@ -160,7 +161,7 @@ namespace Lab1
             // 
             матричныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { размытиеToolStripMenuItem, размытиеПоГауссуToolStripMenuItem, собельToolStripMenuItem, резкостьматричнаяToolStripMenuItem, тиснениеToolStripMenuItem, motionBlurToolStripMenuItem });
             матричныеToolStripMenuItem.Name = "матричныеToolStripMenuItem";
-            матричныеToolStripMenuItem.Size = new Size(209, 34);
+            матричныеToolStripMenuItem.Size = new Size(270, 34);
             матричныеToolStripMenuItem.Text = "Матричные";
             // 
             // размытиеToolStripMenuItem
@@ -255,6 +256,13 @@ namespace Lab1
             backgroundWorker2.ProgressChanged += backgroundWorker_ProgressChanged;
             backgroundWorker2.RunWorkerCompleted += backgroundWorker2_RunWorkerCompleted;
             // 
+            // серыйМирToolStripMenuItem
+            // 
+            серыйМирToolStripMenuItem.Name = "серыйМирToolStripMenuItem";
+            серыйМирToolStripMenuItem.Size = new Size(280, 34);
+            серыйМирToolStripMenuItem.Text = "«Серый мир»";
+            серыйМирToolStripMenuItem.Click += серыйМирToolStripMenuItem_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -306,5 +314,6 @@ namespace Lab1
         private ToolStripMenuItem motionBlurToolStripMenuItem;
         private ToolStripMenuItem переносToolStripMenuItem;
         private ToolStripMenuItem поворотToolStripMenuItem;
+        private ToolStripMenuItem серыйМирToolStripMenuItem;
     }
 }

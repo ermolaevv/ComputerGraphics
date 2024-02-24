@@ -245,6 +245,12 @@ namespace Lab1
             Filters.Filter filter = new Filters.Rotation();
             backgroundWorker1.RunWorkerAsync(filter);
         }
+
+        private void серыйМирToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.GrayWorld(src);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
         #endregion
     }
 }
