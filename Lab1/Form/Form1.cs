@@ -154,9 +154,7 @@ namespace Lab1
         {
             if (backgroundWorker1.IsBusy)
                 backgroundWorker1.CancelAsync();
-            if (backgroundWorker2.IsBusy)
-                backgroundWorker2.CancelAsync();
-            while (backgroundWorker1.IsBusy || backgroundWorker2.IsBusy)
+            while (backgroundWorker1.IsBusy)
             {
                 Thread.Sleep(200);
                 Application.DoEvents();
@@ -196,16 +194,7 @@ namespace Lab1
 
         private void тиснениеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters.Filter filter = new Filters.GrayScaleFilter();
-            backgroundWorker2.RunWorkerAsync(filter);
-
-            filter = new Filters.EmbossingFilter();
-
-            while (backgroundWorker2.IsBusy)
-            {
-                Thread.Sleep(200);
-                Application.DoEvents();
-            }
+            Filters.Filter filter = new Filters.EmbossingFilter();
             backgroundWorker1.RunWorkerAsync(filter);
         }
         private void увеличениеЯркостиToolStripMenuItem_Click(object sender, EventArgs e)
@@ -269,7 +258,7 @@ namespace Lab1
             Filters.Filter filter = new Filters.ReferenceColorCorrection(Color.FromArgb(123, 45, 62), Color.FromArgb(163, 120, 180));
             backgroundWorker1.RunWorkerAsync(filter);
         }
-        #endregion
+
 
         private void резкость2ToolStripMenuItem_Click(object sender, EventArgs e)
         {

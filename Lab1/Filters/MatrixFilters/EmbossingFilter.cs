@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,6 +48,12 @@ namespace Lab1.Filters
                 Clamp((int)(resultG + 255) / 2, 0, 255),
                 Clamp((int)(resultB + 255) / 2, 0, 255)
                 );
+        }
+        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker backgroundWorker)
+        {
+            Filter grayScale = new Filters.GrayScaleFilter();
+            sourceImage = grayScale.processImage(sourceImage, backgroundWorker);
+            return base.processImage(sourceImage, backgroundWorker );
         }
     }
 }

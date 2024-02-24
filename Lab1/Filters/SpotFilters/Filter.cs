@@ -10,7 +10,7 @@ namespace Lab1.Filters
     abstract class Filter
     {
         protected abstract Color calculateNewPixelColor(Bitmap sourceImage, int x, int y);
-        public Bitmap processImage(Bitmap sourceImage, BackgroundWorker backgroundWorker)
+        public virtual Bitmap processImage(Bitmap sourceImage, BackgroundWorker backgroundWorker)
         {
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
 
