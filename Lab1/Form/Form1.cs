@@ -211,5 +211,11 @@ namespace Lab1
             backgroundWorker1.RunWorkerAsync(filter);
         }
         #endregion
+
+        private void резкость2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.MatrixSharpness_2();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
     }
 }

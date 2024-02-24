@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Lab1.Filters
 {
-    internal class MatrixSharpness: MatrixFilter
+    internal class MatrixSharpness_2: MatrixFilter
     {
-        public MatrixSharpness() : base(new float[,] { { 0, -1, 0 }, { -1, 5, -1 }, { 0, -1, 0 } }) {}
+        public MatrixSharpness_2(): base(new float[,] { {-1,-1,-1 }, {-1, 9, -1 }, { -1, -1, -1} }) {}
     }
 }
