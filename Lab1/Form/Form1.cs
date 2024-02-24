@@ -263,6 +263,12 @@ namespace Lab1
             Filters.Filter filter = new Filters.LinearCorrection(src);
             backgroundWorker1.RunWorkerAsync(filter);
         }
+
+        private void коррекцияСОпорнымЦветомToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.ReferenceColorCorrection(Color.FromArgb(123,45,62), Color.FromArgb(163, 120, 180));
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
         #endregion
     }
 }
