@@ -229,5 +229,11 @@ namespace Lab1
             Filters.Filter filter = new Filters.PruittFilter();
             backgroundWorker1.RunWorkerAsync(filter);
         }
+
+        private void волны1ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.WaveFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
     }
 }

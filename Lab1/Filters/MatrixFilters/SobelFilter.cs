@@ -23,7 +23,21 @@ namespace Lab1.Filters
         };
 
         public SobelFilter() : base(null) { }
+        public Bitmap ProcessImage(Bitmap sourceImage)
+        {
+            Bitmap result = new Bitmap(sourceImage.Width, sourceImage.Height);
 
+            for (int y = 0; y < sourceImage.Height; y++)
+            {
+                for (int x = 0; x < sourceImage.Width; x++)
+                {
+                    Color newPixelColor = calculateNewPixelColor(sourceImage, x, y);
+                    result.SetPixel(x, y, newPixelColor);
+                }
+            }
+
+            return result;
+        }
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             float gx = ApplyKernel(sourceImage, x, y, horizontalKernel);

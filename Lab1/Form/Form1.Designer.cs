@@ -47,6 +47,7 @@ namespace Lab1
             тиснениеToolStripMenuItem = new ToolStripMenuItem();
             резкость2ToolStripMenuItem = new ToolStripMenuItem();
             щерраToolStripMenuItem = new ToolStripMenuItem();
+            прюToolStripMenuItem = new ToolStripMenuItem();
             openFileDialog1 = new OpenFileDialog();
             saveFileDialog1 = new SaveFileDialog();
             pictureBox1 = new PictureBox();
@@ -54,7 +55,7 @@ namespace Lab1
             progressBar1 = new ProgressBar();
             cancelButton = new Button();
             backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
-            прюToolStripMenuItem = new ToolStripMenuItem();
+            волны1ToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -80,7 +81,7 @@ namespace Lab1
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(187, 26);
+            openToolStripMenuItem.Size = new Size(224, 26);
             openToolStripMenuItem.Text = "Открыть";
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
@@ -88,7 +89,7 @@ namespace Lab1
             // 
             saveToolStripMenuItem.Enabled = false;
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(187, 26);
+            saveToolStripMenuItem.Size = new Size(224, 26);
             saveToolStripMenuItem.Text = "Сохранить";
             saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
@@ -96,7 +97,7 @@ namespace Lab1
             // 
             восстановитьToolStripMenuItem.Enabled = false;
             восстановитьToolStripMenuItem.Name = "восстановитьToolStripMenuItem";
-            восстановитьToolStripMenuItem.Size = new Size(187, 26);
+            восстановитьToolStripMenuItem.Size = new Size(224, 26);
             восстановитьToolStripMenuItem.Text = "Восстановить";
             восстановитьToolStripMenuItem.Click += восстановитьToolStripMenuItem_Click;
             // 
@@ -110,7 +111,7 @@ namespace Lab1
             // 
             // точечныеToolStripMenuItem
             // 
-            точечныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { инверсияToolStripMenuItem, grayScaleToolStripMenuItem, увеличениеЯркостиToolStripMenuItem, сепияToolStripMenuItem });
+            точечныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { инверсияToolStripMenuItem, grayScaleToolStripMenuItem, увеличениеЯркостиToolStripMenuItem, сепияToolStripMenuItem, волны1ToolStripMenuItem });
             точечныеToolStripMenuItem.Name = "точечныеToolStripMenuItem";
             точечныеToolStripMenuItem.Size = new Size(224, 26);
             точечныеToolStripMenuItem.Text = "Точечные";
@@ -199,6 +200,13 @@ namespace Lab1
             щерраToolStripMenuItem.Text = "Щерра";
             щерраToolStripMenuItem.Click += щерраToolStripMenuItem_Click;
             // 
+            // прюToolStripMenuItem
+            // 
+            прюToolStripMenuItem.Name = "прюToolStripMenuItem";
+            прюToolStripMenuItem.Size = new Size(229, 26);
+            прюToolStripMenuItem.Text = "Прюитт";
+            прюToolStripMenuItem.Click += прюToolStripMenuItem_Click;
+            // 
             // openFileDialog1
             // 
             openFileDialog1.FileName = "openFileDialog1";
@@ -247,12 +255,12 @@ namespace Lab1
             backgroundWorker2.ProgressChanged += backgroundWorker_ProgressChanged;
             backgroundWorker2.RunWorkerCompleted += backgroundWorker2_RunWorkerCompleted;
             // 
-            // прюToolStripMenuItem
+            // волны1ToolStripMenuItem
             // 
-            прюToolStripMenuItem.Name = "прюToolStripMenuItem";
-            прюToolStripMenuItem.Size = new Size(229, 26);
-            прюToolStripMenuItem.Text = "Прюитт";
-            прюToolStripMenuItem.Click += прюToolStripMenuItem_Click;
+            волны1ToolStripMenuItem.Name = "волны1ToolStripMenuItem";
+            волны1ToolStripMenuItem.Size = new Size(235, 26);
+            волны1ToolStripMenuItem.Text = "Волны 1";
+            волны1ToolStripMenuItem.Click += волны1ToolStripMenuItem_Click;
             // 
             // Form1
             // 
@@ -305,5 +313,6 @@ namespace Lab1
         private ToolStripMenuItem резкость2ToolStripMenuItem;
         private ToolStripMenuItem щерраToolStripMenuItem;
         private ToolStripMenuItem прюToolStripMenuItem;
+        private ToolStripMenuItem волны1ToolStripMenuItem;
     }
 }
