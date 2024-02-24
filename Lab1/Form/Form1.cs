@@ -54,15 +54,20 @@ namespace Lab1
 
         private void восстановитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            stopBackgroundWorkers();
+
             updateHistory();
             src = reference;
             pictureBox1.Image = src;
             pictureBox1.Refresh();
         }
+
         private void undo()
         {
             if (history.Count > 0)
             {
+                stopBackgroundWorkers();
+
                 src = history.Last();
                 history.RemoveLast();
 
@@ -144,6 +149,18 @@ namespace Lab1
             src = newImage;
             cancelButton.Enabled = false;
             progressBar1.Value = 0;
+        }
+        private void stopBackgroundWorkers()
+        {
+            if (backgroundWorker1.IsBusy)
+                backgroundWorker1.CancelAsync();
+            if (backgroundWorker2.IsBusy)
+                backgroundWorker2.CancelAsync();
+            while (backgroundWorker1.IsBusy || backgroundWorker2.IsBusy)
+            {
+                Thread.Sleep(200);
+                Application.DoEvents();
+            }
         }
         #endregion
 

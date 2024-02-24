@@ -241,6 +241,8 @@ namespace Lab1
             // 
             // backgroundWorker2
             // 
+            backgroundWorker2.WorkerReportsProgress = true;
+            backgroundWorker2.WorkerSupportsCancellation = true;
             backgroundWorker2.DoWork += backgroundWorker_DoWork;
             backgroundWorker2.ProgressChanged += backgroundWorker_ProgressChanged;
             backgroundWorker2.RunWorkerCompleted += backgroundWorker2_RunWorkerCompleted;
