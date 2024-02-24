@@ -39,6 +39,7 @@ namespace Lab1
             grayScaleToolStripMenuItem = new ToolStripMenuItem();
             увеличениеЯркостиToolStripMenuItem = new ToolStripMenuItem();
             сепияToolStripMenuItem = new ToolStripMenuItem();
+            переносToolStripMenuItem = new ToolStripMenuItem();
             матричныеToolStripMenuItem = new ToolStripMenuItem();
             размытиеToolStripMenuItem = new ToolStripMenuItem();
             размытиеПоГауссуToolStripMenuItem = new ToolStripMenuItem();
@@ -107,7 +108,7 @@ namespace Lab1
             // 
             // точечныеToolStripMenuItem
             // 
-            точечныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { инверсияToolStripMenuItem, grayScaleToolStripMenuItem, увеличениеЯркостиToolStripMenuItem, сепияToolStripMenuItem });
+            точечныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { инверсияToolStripMenuItem, grayScaleToolStripMenuItem, увеличениеЯркостиToolStripMenuItem, сепияToolStripMenuItem, переносToolStripMenuItem });
             точечныеToolStripMenuItem.Name = "точечныеToolStripMenuItem";
             точечныеToolStripMenuItem.Size = new Size(270, 34);
             точечныеToolStripMenuItem.Text = "Точечные";
@@ -139,6 +140,13 @@ namespace Lab1
             сепияToolStripMenuItem.Size = new Size(280, 34);
             сепияToolStripMenuItem.Text = "Сепия";
             сепияToolStripMenuItem.Click += сепияToolStripMenuItem_Click;
+            // 
+            // переносToolStripMenuItem
+            // 
+            переносToolStripMenuItem.Name = "переносToolStripMenuItem";
+            переносToolStripMenuItem.Size = new Size(280, 34);
+            переносToolStripMenuItem.Text = "Перенос";
+            переносToolStripMenuItem.Click += переносToolStripMenuItem_Click;
             // 
             // матричныеToolStripMenuItem
             // 
@@ -286,5 +294,6 @@ namespace Lab1
         private ToolStripMenuItem тиснениеToolStripMenuItem;
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
         private ToolStripMenuItem motionBlurToolStripMenuItem;
+        private ToolStripMenuItem переносToolStripMenuItem;
     }
 }
