@@ -8,34 +8,31 @@ namespace Lab1.Filters
 {
     internal class SharraFilter: MatrixFilter
     {
-        public SharraFilter()
+        private float[,] horizontalKernel = new float[,]
         {
-            float[,] horizontalKernel = new float[,]
-            {
-                {3, 10, 3},
-                {0, 0, 0},
-                {-3, -10, -3}
-            };
-            float[,] verticalKernel = new float[,]
-            {
-                {3, 0, -3},
-                {10, 0, -10},
-                {3, 0, -3}
-            };
-            kernel = CombineKernels(horizontalKernel, verticalKernel);
-        }
+            { 3,  10,  3},
+            { 0,   0,  0},
+            {-3, -10, -3}
+        };
 
-        private float[,] CombineKernels(float[,] kernel1, float[,] kernel2)
+        private float[,] verticalKernel = new float[,]
         {
-            int size = kernel1.GetLength(0);
-            float[,] combinedKernel = new float[size, size];
+            { 3, 0, -3},
+            {10, 0,-10},
+            { 3, 0, -3}
+        };
 
-            for (int i = 0; i < size; i++){
-                for (int j = 0; j < size; j++){
-                    combinedKernel[i, j] = kernel1[i, j] * kernel2[i, j];
-                }
-            }
-            return combinedKernel;
+        public SharraFilter() : base(null) { }
+
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            float gx = ApplyKernel(sourceImage, x, y, horizontalKernel);
+            float gy = ApplyKernel(sourceImage, x, y, verticalKernel);
+
+            int intensity = (int)Math.Sqrt(gx * gx + gy * gy);
+            intensity = Clamp(intensity, 0, 255);
+
+            return Color.FromArgb(intensity, intensity, intensity);
         }
     }
 }

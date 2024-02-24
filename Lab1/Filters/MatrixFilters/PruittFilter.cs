@@ -6,35 +6,34 @@ using System.Threading.Tasks;
 
 namespace Lab1.Filters
 {
-    internal class PruittFilter: MatrixFilter
+    internal class PruittFilter : MatrixFilter
     {
-        public PruittFilter() {
-            float[,] horizontalKernel = new float[,]
-            {
-                {-1, -1, -1},
-                {0, 0, 0},
-                {1, 1, 1}
-            };
-            float[,] verticalKernel = new float[,]
-            {
-                {-1, 0, 1},
-                {-1, 0, 1},
-                {-1, 0, 1}
-            };
-            kernel = CombineKernels(horizontalKernel, verticalKernel);
-        }
 
-        private float[,] CombineKernels(float[,] kernel1, float[,] kernel2)
+        private float[,] horizontalKernel = new float[,]
         {
-            int size = kernel1.GetLength(0);
-            float[,] combinedKernel = new float[size, size];
+            {-1, -1, -1},
+            { 0,  0,  0},
+            { 1,  1,  1}
+        };
 
-            for (int i = 0; i < size; i++){
-                for (int j = 0; j < size; j++){
-                    combinedKernel[i, j] = kernel1[i, j] * kernel2[i, j];
-                }
-            }
-            return combinedKernel;
+        private float[,] verticalKernel = new float[,]
+        {
+            {-1, 0, 1},
+            {-1, 0, 1},
+            {-1, 0, 1}
+        };
+
+        public PruittFilter() : base(null) { }
+
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            float gx = ApplyKernel(sourceImage, x, y, horizontalKernel);
+            float gy = ApplyKernel(sourceImage, x, y, verticalKernel);
+
+            int intensity = (int)Math.Sqrt(gx * gx + gy * gy);
+            intensity = Clamp(intensity, 0, 255);
+
+            return Color.FromArgb(intensity, intensity, intensity);
         }
     }
 }
