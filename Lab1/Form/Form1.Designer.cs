@@ -40,6 +40,7 @@ namespace Lab1
             увеличениеЯркостиToolStripMenuItem = new ToolStripMenuItem();
             сепияToolStripMenuItem = new ToolStripMenuItem();
             волны1ToolStripMenuItem = new ToolStripMenuItem();
+            волны2ToolStripMenuItem = new ToolStripMenuItem();
             матричныеToolStripMenuItem = new ToolStripMenuItem();
             размытиеToolStripMenuItem = new ToolStripMenuItem();
             размытиеПоГауссуToolStripMenuItem = new ToolStripMenuItem();
@@ -56,7 +57,7 @@ namespace Lab1
             progressBar1 = new ProgressBar();
             cancelButton = new Button();
             backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
-            волны2ToolStripMenuItem = new ToolStripMenuItem();
+            стеклоToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -112,7 +113,7 @@ namespace Lab1
             // 
             // точечныеToolStripMenuItem
             // 
-            точечныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { инверсияToolStripMenuItem, grayScaleToolStripMenuItem, увеличениеЯркостиToolStripMenuItem, сепияToolStripMenuItem, волны1ToolStripMenuItem, волны2ToolStripMenuItem });
+            точечныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { инверсияToolStripMenuItem, grayScaleToolStripMenuItem, увеличениеЯркостиToolStripMenuItem, сепияToolStripMenuItem, волны1ToolStripMenuItem, волны2ToolStripMenuItem, стеклоToolStripMenuItem });
             точечныеToolStripMenuItem.Name = "точечныеToolStripMenuItem";
             точечныеToolStripMenuItem.Size = new Size(224, 26);
             точечныеToolStripMenuItem.Text = "Точечные";
@@ -151,6 +152,13 @@ namespace Lab1
             волны1ToolStripMenuItem.Size = new Size(235, 26);
             волны1ToolStripMenuItem.Text = "Волны 1";
             волны1ToolStripMenuItem.Click += волны1ToolStripMenuItem_Click;
+            // 
+            // волны2ToolStripMenuItem
+            // 
+            волны2ToolStripMenuItem.Name = "волны2ToolStripMenuItem";
+            волны2ToolStripMenuItem.Size = new Size(235, 26);
+            волны2ToolStripMenuItem.Text = "Волны 2";
+            волны2ToolStripMenuItem.Click += волны2ToolStripMenuItem_Click;
             // 
             // матричныеToolStripMenuItem
             // 
@@ -263,12 +271,12 @@ namespace Lab1
             backgroundWorker2.ProgressChanged += backgroundWorker_ProgressChanged;
             backgroundWorker2.RunWorkerCompleted += backgroundWorker2_RunWorkerCompleted;
             // 
-            // волны2ToolStripMenuItem
+            // стеклоToolStripMenuItem
             // 
-            волны2ToolStripMenuItem.Name = "волны2ToolStripMenuItem";
-            волны2ToolStripMenuItem.Size = new Size(235, 26);
-            волны2ToolStripMenuItem.Text = "Волны 2";
-            волны2ToolStripMenuItem.Click += волны2ToolStripMenuItem_Click;
+            стеклоToolStripMenuItem.Name = "стеклоToolStripMenuItem";
+            стеклоToolStripMenuItem.Size = new Size(235, 26);
+            стеклоToolStripMenuItem.Text = "Стекло";
+            стеклоToolStripMenuItem.Click += стеклоToolStripMenuItem_Click;
             // 
             // Form1
             // 
@@ -323,5 +331,6 @@ namespace Lab1
         private ToolStripMenuItem прюToolStripMenuItem;
         private ToolStripMenuItem волны1ToolStripMenuItem;
         private ToolStripMenuItem волны2ToolStripMenuItem;
+        private ToolStripMenuItem стеклоToolStripMenuItem;
     }
 }
