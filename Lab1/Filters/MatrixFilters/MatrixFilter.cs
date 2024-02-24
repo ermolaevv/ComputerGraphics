@@ -45,5 +45,25 @@ namespace Lab1.Filters
                 Clamp((int)resultB, 0, 255)
                 );
         }
+        protected float ApplyKernel(Bitmap sourceImage, int x, int y, float[,] kernel)
+        {
+            float result = 0;
+            int kernelWidth = kernel.GetLength(0);
+            int kernelHeight = kernel.GetLength(1);
+            int halfKernelWidth = kernelWidth / 2;
+            int halfKernelHeight = kernelHeight / 2;
+
+            for (int i = -halfKernelHeight; i <= halfKernelHeight; i++){
+                for (int j = -halfKernelWidth; j <= halfKernelWidth; j++){
+                    int pixelX = Clamp(x + j, 0, sourceImage.Width - 1);
+                    int pixelY = Clamp(y + i, 0, sourceImage.Height - 1);
+                    Color pixelColor = sourceImage.GetPixel(pixelX, pixelY);
+
+                    float grayIntensity = (pixelColor.R + pixelColor.G + pixelColor.B) / 3f;
+                    result += grayIntensity * kernel[j + halfKernelWidth, i + halfKernelHeight];
+                }
+            }
+            return result;
+        }
     }
 }

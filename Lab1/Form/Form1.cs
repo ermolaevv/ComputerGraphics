@@ -105,7 +105,7 @@ namespace Lab1
         }
         private void backgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            //cancelButton.Enabled = true;
+            cancelButton.Enabled = true;
 
             Bitmap processImage = ((Filters.Filter)e.Argument).processImage(src, backgroundWorker1);
             if (!backgroundWorker1.CancellationPending)
@@ -270,6 +270,42 @@ namespace Lab1
             backgroundWorker1.RunWorkerAsync(filter);
         }
         #endregion
+
+        private void резкость2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.MatrixSharpness_2();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void щерраToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.SharraFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void прюToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.PruittFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void волны1ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.WaveFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void волны2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.WaveFilter_2();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void стеклоToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.GlassFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
 
         private void медианныйФильтрToolStripMenuItem_Click(object sender, EventArgs e)
         {

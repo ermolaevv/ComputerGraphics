@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,36 +8,46 @@ namespace Lab1.Filters
 {  
     internal class SobelFilter: MatrixFilter
     {
-        public SobelFilter()
+        private float[,] horizontalKernel = new float[,]
         {
-            float[,] horizontalKernel = new float[,]
-            {
-                {-1, 0, 1},
-                {-2, 0, 2},
-                {-1, 0, 1}
-            };
+            {-1, 0, 1},
+            {-2, 0, 2},
+            {-1, 0, 1}
+        };
 
-            float[,] verticalKernel = new float[,]
-            {
-                {-1, -2, -1},
-                {0, 0, 0},
-                {1, 2, 1}
-            };
-            kernel = CombineKernels(horizontalKernel, verticalKernel);
-        }
-
-        private float[,] CombineKernels(float[,] kernel1, float[,] kernel2)
+        private float[,] verticalKernel = new float[,]
         {
-            int size = kernel1.GetLength(0);
-            float[,] combinedKernel = new float[size, size];
+            {-1, -2, -1},
+            { 0,  0,  0},
+            { 1,  2,  1}
+        };
 
-            for (int i = 0; i < size; i++){
-                for (int j = 0; j < size; j++){
-                    combinedKernel[i, j] = kernel1[i, j] * kernel2[i, j];
+        public SobelFilter() : base(null) { }
+        public Bitmap ProcessImage(Bitmap sourceImage)
+        {
+            Bitmap result = new Bitmap(sourceImage.Width, sourceImage.Height);
+
+            for (int y = 0; y < sourceImage.Height; y++)
+            {
+                for (int x = 0; x < sourceImage.Width; x++)
+                {
+                    Color newPixelColor = calculateNewPixelColor(sourceImage, x, y);
+                    result.SetPixel(x, y, newPixelColor);
                 }
             }
-            return combinedKernel;
+
+            return result;
         }
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            float gx = ApplyKernel(sourceImage, x, y, horizontalKernel);
+            float gy = ApplyKernel(sourceImage, x, y, verticalKernel);
+            int intensity = (int)Math.Sqrt(gx * gx + gy * gy);
+            intensity = Clamp(intensity, 0, 255);
+
+            return Color.FromArgb(intensity, intensity, intensity);
+        }
+
     }
 }
 
