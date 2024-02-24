@@ -54,15 +54,20 @@ namespace Lab1
 
         private void восстановитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            stopBackgroundWorkers();
+
             updateHistory();
             src = reference;
             pictureBox1.Image = src;
             pictureBox1.Refresh();
         }
+
         private void undo()
         {
             if (history.Count > 0)
             {
+                stopBackgroundWorkers();
+
                 src = history.Last();
                 history.RemoveLast();
 
@@ -145,6 +150,18 @@ namespace Lab1
             cancelButton.Enabled = false;
             progressBar1.Value = 0;
         }
+        private void stopBackgroundWorkers()
+        {
+            if (backgroundWorker1.IsBusy)
+                backgroundWorker1.CancelAsync();
+            if (backgroundWorker2.IsBusy)
+                backgroundWorker2.CancelAsync();
+            while (backgroundWorker1.IsBusy || backgroundWorker2.IsBusy)
+            {
+                Thread.Sleep(200);
+                Application.DoEvents();
+            }
+        }
         #endregion
 
         #region FilterItem_Click
@@ -208,6 +225,48 @@ namespace Lab1
         private void резкостьматричнаяToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters.Filter filter = new Filters.MatrixSharpness();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void motionBlurToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.MotionBlur();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void переносToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.Transfer();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void поворотToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.Rotation();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void серыйМирToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.GrayWorld(src);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void идеальныйОтражательToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.PerfectReflector(src);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void линейнаяКоррекцияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.LinearCorrection(src);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void коррекцияСОпорнымЦветомToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.ReferenceColorCorrection(Color.FromArgb(123,45,62), Color.FromArgb(163, 120, 180));
             backgroundWorker1.RunWorkerAsync(filter);
         }
         #endregion
