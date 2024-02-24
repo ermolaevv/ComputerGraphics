@@ -144,12 +144,6 @@ namespace Lab1
             cancelButton.Enabled = false;
             progressBar1.Value = 0;
         }
-        private void backgroundWorker2_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-            src = newImage;
-            cancelButton.Enabled = false;
-            progressBar1.Value = 0;
-        }
         private void stopBackgroundWorkers()
         {
             if (backgroundWorker1.IsBusy)
@@ -259,7 +253,6 @@ namespace Lab1
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
-
         private void резкость2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters.Filter filter = new Filters.MatrixSharpness_2();
@@ -311,6 +304,12 @@ namespace Lab1
         private void фильтрминимумToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters.Filter filter = new Filters.MinimumFilter(5);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void светящиесяКраяToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.GlowingEdges();
             backgroundWorker1.RunWorkerAsync(filter);
         }
         #endregion

@@ -309,6 +309,13 @@ namespace Lab1
             фильтрМаксмимумToolStripMenuItem.Text = "Фильтр «максимум»";
             фильтрМаксмимумToolStripMenuItem.Click += фильтрМаксмимумToolStripMenuItem_Click;
             // 
+            // светящиесяКраяToolStripMenuItem
+            // 
+            светящиесяКраяToolStripMenuItem.Name = "светящиесяКраяToolStripMenuItem";
+            светящиесяКраяToolStripMenuItem.Size = new Size(280, 34);
+            светящиесяКраяToolStripMenuItem.Text = "Светящиеся края";
+            светящиесяКраяToolStripMenuItem.Click += светящиесяКраяToolStripMenuItem_Click;
+            // 
             // openFileDialog1
             // 
             openFileDialog1.FileName = "openFileDialog1";
@@ -412,6 +419,7 @@ namespace Lab1
         private ToolStripMenuItem волны1ToolStripMenuItem;
         private ToolStripMenuItem волны2ToolStripMenuItem;
         private ToolStripMenuItem стеклоToolStripMenuItem;
+        private ToolStripMenuItem светящиесяКраяToolStripMenuItem;
         private ToolStripMenuItem фильтрМаксмимумToolStripMenuItem;
         private ToolStripMenuItem фильтрминимумToolStripMenuItem;
     }
