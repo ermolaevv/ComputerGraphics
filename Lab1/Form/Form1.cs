@@ -257,6 +257,12 @@ namespace Lab1
             Filters.Filter filter = new Filters.PerfectReflector(src);
             backgroundWorker1.RunWorkerAsync(filter);
         }
+
+        private void линейнаяКоррекцияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.LinearCorrection(src);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
         #endregion
     }
 }

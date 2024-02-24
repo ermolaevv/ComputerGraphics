@@ -42,6 +42,7 @@ namespace Lab1
             переносToolStripMenuItem = new ToolStripMenuItem();
             поворотToolStripMenuItem = new ToolStripMenuItem();
             серыйМирToolStripMenuItem = new ToolStripMenuItem();
+            идеальныйОтражательToolStripMenuItem = new ToolStripMenuItem();
             матричныеToolStripMenuItem = new ToolStripMenuItem();
             размытиеToolStripMenuItem = new ToolStripMenuItem();
             размытиеПоГауссуToolStripMenuItem = new ToolStripMenuItem();
@@ -56,7 +57,7 @@ namespace Lab1
             progressBar1 = new ProgressBar();
             cancelButton = new Button();
             backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
-            идеальныйОтражательToolStripMenuItem = new ToolStripMenuItem();
+            линейнаяКоррекцияToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -111,7 +112,7 @@ namespace Lab1
             // 
             // точечныеToolStripMenuItem
             // 
-            точечныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { инверсияToolStripMenuItem, grayScaleToolStripMenuItem, увеличениеЯркостиToolStripMenuItem, сепияToolStripMenuItem, переносToolStripMenuItem, поворотToolStripMenuItem, серыйМирToolStripMenuItem, идеальныйОтражательToolStripMenuItem });
+            точечныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { инверсияToolStripMenuItem, grayScaleToolStripMenuItem, увеличениеЯркостиToolStripMenuItem, сепияToolStripMenuItem, переносToolStripMenuItem, поворотToolStripMenuItem, серыйМирToolStripMenuItem, идеальныйОтражательToolStripMenuItem, линейнаяКоррекцияToolStripMenuItem });
             точечныеToolStripMenuItem.Name = "точечныеToolStripMenuItem";
             точечныеToolStripMenuItem.Size = new Size(270, 34);
             точечныеToolStripMenuItem.Text = "Точечные";
@@ -164,6 +165,13 @@ namespace Lab1
             серыйМирToolStripMenuItem.Size = new Size(323, 34);
             серыйМирToolStripMenuItem.Text = "«Серый мир»";
             серыйМирToolStripMenuItem.Click += серыйМирToolStripMenuItem_Click;
+            // 
+            // идеальныйОтражательToolStripMenuItem
+            // 
+            идеальныйОтражательToolStripMenuItem.Name = "идеальныйОтражательToolStripMenuItem";
+            идеальныйОтражательToolStripMenuItem.Size = new Size(323, 34);
+            идеальныйОтражательToolStripMenuItem.Text = "«Идеальный отражатель»";
+            идеальныйОтражательToolStripMenuItem.Click += идеальныйОтражательToolStripMenuItem_Click;
             // 
             // матричныеToolStripMenuItem
             // 
@@ -264,12 +272,12 @@ namespace Lab1
             backgroundWorker2.ProgressChanged += backgroundWorker_ProgressChanged;
             backgroundWorker2.RunWorkerCompleted += backgroundWorker2_RunWorkerCompleted;
             // 
-            // идеальныйОтражательToolStripMenuItem
+            // линейнаяКоррекцияToolStripMenuItem
             // 
-            идеальныйОтражательToolStripMenuItem.Name = "идеальныйОтражательToolStripMenuItem";
-            идеальныйОтражательToolStripMenuItem.Size = new Size(323, 34);
-            идеальныйОтражательToolStripMenuItem.Text = "«Идеальный отражатель»";
-            идеальныйОтражательToolStripMenuItem.Click += идеальныйОтражательToolStripMenuItem_Click;
+            линейнаяКоррекцияToolStripMenuItem.Name = "линейнаяКоррекцияToolStripMenuItem";
+            линейнаяКоррекцияToolStripMenuItem.Size = new Size(323, 34);
+            линейнаяКоррекцияToolStripMenuItem.Text = "Линейная коррекция";
+            линейнаяКоррекцияToolStripMenuItem.Click += линейнаяКоррекцияToolStripMenuItem_Click;
             // 
             // Form1
             // 
@@ -324,5 +332,6 @@ namespace Lab1
         private ToolStripMenuItem поворотToolStripMenuItem;
         private ToolStripMenuItem серыйМирToolStripMenuItem;
         private ToolStripMenuItem идеальныйОтражательToolStripMenuItem;
+        private ToolStripMenuItem линейнаяКоррекцияToolStripMenuItem;
     }
 }
