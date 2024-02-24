@@ -210,6 +210,12 @@ namespace Lab1
             Filters.Filter filter = new Filters.MatrixSharpness();
             backgroundWorker1.RunWorkerAsync(filter);
         }
+
+        private void motionBlurToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters.Filter filter = new Filters.MotionBlur();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
         #endregion
     }
 }
