@@ -9,11 +9,35 @@ namespace Lab1
         private static Bitmap newImage;
         private static LinkedList<Bitmap> history;
         private const int maxHistorySize = 10;
+        private Size originalPictureBoxSize;
+        private Point originalPictureBoxLocation;
+        private int bottomControlsHeight;
         public Form1()
         {
             InitializeComponent();
             history = new LinkedList<Bitmap>();
+
+            originalPictureBoxSize = pictureBox1.Size;
+            originalPictureBoxLocation = pictureBox1.Location;
+
+            bottomControlsHeight = this.ClientSize.Height - (pictureBox1.Location.Y + pictureBox1.Height) + progressBar1.Height + cancelButton.Height + 1; 
+            this.Resize += Form1_Resize;
         }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            ResizeControlKeepingBottomSpace(pictureBox1, originalPictureBoxSize, originalPictureBoxLocation, bottomControlsHeight);
+        }
+
+        private void ResizeControlKeepingBottomSpace(Control control, Size originalSize, Point originalLocation, int bottomSpace)
+        {
+            int availableHeight = this.ClientSize.Height - bottomSpace - originalLocation.Y;
+            float widthRatio = (float)this.ClientSize.Width / originalPictureBoxSize.Width;
+            float heightRatio = (float)availableHeight / originalPictureBoxSize.Height;
+            control.Size = new Size((int)(originalSize.Width * widthRatio), (int)(originalSize.Height * heightRatio));
+            control.Location = new Point(originalLocation.X, originalLocation.Y); 
+        }
+
 
         #region File
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -219,13 +243,17 @@ namespace Lab1
 
         private void переносToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters.Filter filter = new Filters.Transfer();
+            string string_constant = Interaction.InputBox("Введите константу: ");
+            int string_To_Int_constant = Convert.ToInt32(string_constant);
+            Filters.Filter filter = new Filters.Transfer(string_To_Int_constant);
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
         private void поворотToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters.Filter filter = new Filters.Rotation();
+            string string_constant = Interaction.InputBox("Введите константу: ");
+            int string_To_Int_constant = Convert.ToInt32(string_constant);
+            Filters.Filter filter = new Filters.Rotation(string_To_Int_constant);
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
@@ -249,9 +277,20 @@ namespace Lab1
 
         private void коррекцияСОпорнымЦветомToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters.Filter filter = new Filters.ReferenceColorCorrection(Color.FromArgb(123, 45, 62), Color.FromArgb(163, 120, 180));
-            backgroundWorker1.RunWorkerAsync(filter);
+            ColorDialog colorDialogSource = new ColorDialog();
+            if (colorDialogSource.ShowDialog() == DialogResult.OK)
+            {
+                Color sourceColor = colorDialogSource.Color;
+                ColorDialog colorDialogResult = new ColorDialog();
+                if (colorDialogResult.ShowDialog() == DialogResult.OK)
+                {
+                    Color resultColor = colorDialogResult.Color;
+                    Filters.Filter filter = new Filters.ReferenceColorCorrection(sourceColor, resultColor);
+                    backgroundWorker1.RunWorkerAsync(filter);
+                }
+            }
         }
+
 
         private void резкость2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
