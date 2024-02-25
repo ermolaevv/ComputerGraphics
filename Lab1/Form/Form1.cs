@@ -219,13 +219,17 @@ namespace Lab1
 
         private void переносToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters.Filter filter = new Filters.Transfer();
+            string string_constant = Interaction.InputBox("Введите константу: ");
+            int string_To_Int_constant = Convert.ToInt32(string_constant);
+            Filters.Filter filter = new Filters.Transfer(string_To_Int_constant);
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
         private void поворотToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters.Filter filter = new Filters.Rotation();
+            string string_constant = Interaction.InputBox("Введите константу: ");
+            int string_To_Int_constant = Convert.ToInt32(string_constant);
+            Filters.Filter filter = new Filters.Rotation(string_To_Int_constant);
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
