@@ -17,13 +17,10 @@ namespace Lab1
             InitializeComponent();
             history = new LinkedList<Bitmap>();
 
-
             originalPictureBoxSize = pictureBox1.Size;
             originalPictureBoxLocation = pictureBox1.Location;
 
-            bottomControlsHeight = this.ClientSize.Height - (pictureBox1.Location.Y + pictureBox1.Height) + progressBar1.Height + cancelButton.Height + 1; // 20 - примерный отступ
-
-            // Подписка на событие Resize
+            bottomControlsHeight = this.ClientSize.Height - (pictureBox1.Location.Y + pictureBox1.Height) + progressBar1.Height + cancelButton.Height + 1; 
             this.Resize += Form1_Resize;
         }
 
@@ -34,18 +31,11 @@ namespace Lab1
 
         private void ResizeControlKeepingBottomSpace(Control control, Size originalSize, Point originalLocation, int bottomSpace)
         {
-            // Вычисление доступного пространства для элемента управления
             int availableHeight = this.ClientSize.Height - bottomSpace - originalLocation.Y;
-
-            // Пропорциональное изменение размеров элемента управления
             float widthRatio = (float)this.ClientSize.Width / originalPictureBoxSize.Width;
             float heightRatio = (float)availableHeight / originalPictureBoxSize.Height;
-
-            // Применение измененных размеров
             control.Size = new Size((int)(originalSize.Width * widthRatio), (int)(originalSize.Height * heightRatio));
-
-            // Местоположение по горизонтали может быть изменено аналогично, если это необходимо
-            control.Location = new Point(originalLocation.X, originalLocation.Y); // В этом случае Y остается неизменным
+            control.Location = new Point(originalLocation.X, originalLocation.Y); 
         }
 
 
@@ -287,9 +277,20 @@ namespace Lab1
 
         private void коррекцияСОпорнымЦветомToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters.Filter filter = new Filters.ReferenceColorCorrection(Color.FromArgb(123, 45, 62), Color.FromArgb(163, 120, 180));
-            backgroundWorker1.RunWorkerAsync(filter);
+            ColorDialog colorDialogSource = new ColorDialog();
+            if (colorDialogSource.ShowDialog() == DialogResult.OK)
+            {
+                Color sourceColor = colorDialogSource.Color;
+                ColorDialog colorDialogResult = new ColorDialog();
+                if (colorDialogResult.ShowDialog() == DialogResult.OK)
+                {
+                    Color resultColor = colorDialogResult.Color;
+                    Filters.Filter filter = new Filters.ReferenceColorCorrection(sourceColor, resultColor);
+                    backgroundWorker1.RunWorkerAsync(filter);
+                }
+            }
         }
+
 
         private void резкость2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
