@@ -9,11 +9,45 @@ namespace Lab1
         private static Bitmap newImage;
         private static LinkedList<Bitmap> history;
         private const int maxHistorySize = 10;
+        private Size originalPictureBoxSize;
+        private Point originalPictureBoxLocation;
+        private int bottomControlsHeight;
         public Form1()
         {
             InitializeComponent();
             history = new LinkedList<Bitmap>();
+
+
+            originalPictureBoxSize = pictureBox1.Size;
+            originalPictureBoxLocation = pictureBox1.Location;
+
+            bottomControlsHeight = this.ClientSize.Height - (pictureBox1.Location.Y + pictureBox1.Height) + progressBar1.Height + cancelButton.Height + 1; // 20 - примерный отступ
+
+            // Подписка на событие Resize
+            this.Resize += Form1_Resize;
         }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            ResizeControlKeepingBottomSpace(pictureBox1, originalPictureBoxSize, originalPictureBoxLocation, bottomControlsHeight);
+        }
+
+        private void ResizeControlKeepingBottomSpace(Control control, Size originalSize, Point originalLocation, int bottomSpace)
+        {
+            // Вычисление доступного пространства для элемента управления
+            int availableHeight = this.ClientSize.Height - bottomSpace - originalLocation.Y;
+
+            // Пропорциональное изменение размеров элемента управления
+            float widthRatio = (float)this.ClientSize.Width / originalPictureBoxSize.Width;
+            float heightRatio = (float)availableHeight / originalPictureBoxSize.Height;
+
+            // Применение измененных размеров
+            control.Size = new Size((int)(originalSize.Width * widthRatio), (int)(originalSize.Height * heightRatio));
+
+            // Местоположение по горизонтали может быть изменено аналогично, если это необходимо
+            control.Location = new Point(originalLocation.X, originalLocation.Y); // В этом случае Y остается неизменным
+        }
+
 
         #region File
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
