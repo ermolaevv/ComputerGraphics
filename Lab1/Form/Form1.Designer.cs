@@ -75,6 +75,7 @@ namespace Lab1
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             progressBar1 = new ProgressBar();
             cancelButton = new Button();
+            topHatToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -333,7 +334,7 @@ namespace Lab1
             // 
             // морфологияToolStripMenuItem
             // 
-            морфологияToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { расширениеToolStripMenuItem, сужениеToolStripMenuItem, открытиеToolStripMenuItem, закрытиеToolStripMenuItem, градиентToolStripMenuItem });
+            морфологияToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { расширениеToolStripMenuItem, сужениеToolStripMenuItem, открытиеToolStripMenuItem, закрытиеToolStripMenuItem, градиентToolStripMenuItem, topHatToolStripMenuItem });
             морфологияToolStripMenuItem.Name = "морфологияToolStripMenuItem";
             морфологияToolStripMenuItem.Size = new Size(270, 34);
             морфологияToolStripMenuItem.Text = "Морфология";
@@ -417,6 +418,13 @@ namespace Lab1
             cancelButton.UseVisualStyleBackColor = true;
             cancelButton.Click += cancelButton_Click;
             // 
+            // topHatToolStripMenuItem
+            // 
+            topHatToolStripMenuItem.Name = "topHatToolStripMenuItem";
+            topHatToolStripMenuItem.Size = new Size(270, 34);
+            topHatToolStripMenuItem.Text = "Top Hat";
+            topHatToolStripMenuItem.Click += topHatToolStripMenuItem_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -488,5 +496,6 @@ namespace Lab1
         private ToolStripMenuItem открытиеToolStripMenuItem;
         private ToolStripMenuItem закрытиеToolStripMenuItem;
         private ToolStripMenuItem градиентToolStripMenuItem;
+        private ToolStripMenuItem topHatToolStripMenuItem;
     }
 }

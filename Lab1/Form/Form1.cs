@@ -387,6 +387,11 @@ namespace Lab1
             processMorphOperation(typeof(MorphGradient));
         }
 
+        private void topHatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            processMorphOperation(typeof(TopHat));
+        }
+
         private void processMorphOperation(Type operation)
         {
             MaskInput maskInput = new MaskInput();
