@@ -13,7 +13,7 @@ namespace Lab1.Filters
 
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
-            int intensity = GetIntesity(sourceImage.GetPixel(x, y));
+            int intensity = GetIntensity(sourceImage.GetPixel(x, y));
             if (intensity < threshold) { return Color.Black; }
             return Color.White;
         }

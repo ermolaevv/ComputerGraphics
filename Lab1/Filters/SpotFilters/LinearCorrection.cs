@@ -19,7 +19,7 @@ namespace Lab1.Filters
                 for (int j = 0; j < sourceImage.Height; j++)
                 {
                     Color color = sourceImage.GetPixel(i, j);
-                    intensity = GetIntesity(color);
+                    intensity = GetIntensity(color);
 
                     if (minSrcIntensity > intensity) minSrcIntensity = intensity;
                     if (maxSrcIntensity < intensity) maxSrcIntensity = intensity;
@@ -29,7 +29,7 @@ namespace Lab1.Filters
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             Color color = sourceImage.GetPixel(x, y);
-            int intensity = GetIntesity(color);
+            int intensity = GetIntensity(color);
             int newIntensity = (intensity - minSrcIntensity) * 255 / (maxSrcIntensity - minSrcIntensity);
 
             float coef = newIntensity / (float)intensity;
