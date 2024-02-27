@@ -9,12 +9,12 @@ namespace Lab1.Filters
 {
     internal class Closing : MorphOperation
     {
-        public Closing(bool[,] mask) : base(mask) { }
+        public Closing(bool[,] mask, int threshold) : base(mask, threshold) { }
 
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker backgroundWorker)
         {
-            sourceImage = new Dilation(kernel).processImage(sourceImage, backgroundWorker);
-            return new Erosion(kernel).processImage(sourceImage, backgroundWorker);
+            sourceImage = new Dilation(kernel, threshold).processImage(sourceImage, backgroundWorker);
+            return new Erosion(kernel, threshold).processImage(sourceImage, backgroundWorker);
         }
 
 

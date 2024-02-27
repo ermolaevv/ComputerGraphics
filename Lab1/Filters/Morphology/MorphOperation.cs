@@ -11,12 +11,13 @@ namespace Lab1.Filters
     {
         protected bool[,] kernel;
         protected int MW, MH;
-        protected int threshold = 128;
-        public MorphOperation(bool[,] mask)
+        protected int threshold;
+        public MorphOperation(bool[,] mask, int threshold = 128)
         {
             kernel = mask;
             MW = mask.GetLength(0);
             MH = mask.GetLength(1);
+            this.threshold = threshold; 
         }
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker backgroundWorker)
         {

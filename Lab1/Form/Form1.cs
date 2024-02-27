@@ -1,3 +1,4 @@
+using Lab1.Filters;
 using Microsoft.VisualBasic;
 
 namespace Lab1
@@ -363,41 +364,34 @@ namespace Lab1
 
         private void расширениеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool[,] mask = new bool[3, 3];
-            for (int i = 0; i < 3; i++)
-                for (int j = 0; j < 3; j++)
-                    mask[i, j] = true;
-            Filters.Filter filter = new Filters.Dilation(mask);
-            backgroundWorker1.RunWorkerAsync(filter);
+            processMorphOperation(typeof(Dilation));
         }
 
         private void сужениеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool[,] mask = new bool[3, 3];
-            for (int i = 0; i < 3; i++)
-                for (int j = 0; j < 3; j++)
-                    mask[i, j] = true;
-            Filters.Filter filter = new Filters.Erosion(mask);
-            backgroundWorker1.RunWorkerAsync(filter);
+            processMorphOperation(typeof(Erosion));
         }
 
         private void открытиеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool[,] mask = new bool[3, 3];
-            for (int i = 0; i < 3; i++)
-                for (int j = 0; j < 3; j++)
-                    mask[i, j] = true;
-            Filters.Filter filter = new Filters.Opening(mask);
-            backgroundWorker1.RunWorkerAsync(filter);
+            processMorphOperation(typeof(Opening));
         }
 
         private void закрытиеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool[,] mask = new bool[3, 3];
-            for (int i = 0; i < 3; i++)
-                for (int j = 0; j < 3; j++)
-                    mask[i, j] = true;
-            Filters.Filter filter = new Filters.Closing(mask);
+            processMorphOperation(typeof(Closing));
+        }
+
+        private void processMorphOperation(Type operation)
+        {
+            MaskInput maskInput = new MaskInput();
+            maskInput.ShowDialog();
+            if (maskInput.DialogResult != DialogResult.OK) return;
+
+            bool[,] mask = maskInput.mask;
+            int threshold = maskInput.threshold;
+            Filters.Filter filter = (Filters.Filter)Activator.CreateInstance(operation, mask, threshold);
+
             backgroundWorker1.RunWorkerAsync(filter);
         }
         #endregion

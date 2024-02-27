@@ -8,7 +8,7 @@ namespace Lab1.Filters
 {
     internal class Erosion : MorphOperation
     {
-        public Erosion(bool[,] mask) : base(mask) { }
+        public Erosion(bool[,] mask, int threshold) : base(mask, threshold) { }
 
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {

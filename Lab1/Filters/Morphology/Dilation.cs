@@ -9,7 +9,7 @@ namespace Lab1.Filters
 {
     internal class Dilation : MorphOperation
     {
-        public Dilation(bool[,] mask) : base(mask) { }
+        public Dilation(bool[,] mask, int threshold) : base(mask, threshold) { }
 
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
