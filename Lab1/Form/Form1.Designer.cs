@@ -63,6 +63,11 @@ namespace Lab1
             фильтрминимумToolStripMenuItem = new ToolStripMenuItem();
             фильтрМаксмимумToolStripMenuItem = new ToolStripMenuItem();
             светящиесяКраяToolStripMenuItem = new ToolStripMenuItem();
+            морфологияToolStripMenuItem = new ToolStripMenuItem();
+            расширениеToolStripMenuItem = new ToolStripMenuItem();
+            сужениеToolStripMenuItem = new ToolStripMenuItem();
+            открытиеToolStripMenuItem = new ToolStripMenuItem();
+            закрытиеToolStripMenuItem = new ToolStripMenuItem();
             openFileDialog1 = new OpenFileDialog();
             saveFileDialog1 = new SaveFileDialog();
             pictureBox1 = new PictureBox();
@@ -116,7 +121,7 @@ namespace Lab1
             // 
             // фильтрыToolStripMenuItem
             // 
-            фильтрыToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { точечныеToolStripMenuItem, матричныеToolStripMenuItem });
+            фильтрыToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { точечныеToolStripMenuItem, матричныеToolStripMenuItem, морфологияToolStripMenuItem });
             фильтрыToolStripMenuItem.Enabled = false;
             фильтрыToolStripMenuItem.Name = "фильтрыToolStripMenuItem";
             фильтрыToolStripMenuItem.Size = new Size(85, 24);
@@ -124,7 +129,7 @@ namespace Lab1
             // 
             // точечныеToolStripMenuItem
             // 
-            точечныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { инверсияToolStripMenuItem, grayScaleToolStripMenuItem, увеличениеЯркостиToolStripMenuItem, сепияToolStripMenuItem, переносToolStripMenuItem, поворотToolStripMenuItem, серыйМирToolStripMenuItem, идеальныйОтражательToolStripMenuItem, линейнаяКоррекцияToolStripMenuItem, коррекцияСОпорнымЦветомToolStripMenuItem, волны1ToolStripMenuItem, волны2ToolStripMenuItem, стеклоToolStripMenuItem });
+            точечныеToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { инверсияToolStripMenuItem, grayScaleToolStripMenuItem, увеличениеЯркостиToolStripMenuItem, сепияToolStripMenuItem, переносToolStripMenuItem, поворотToolStripMenuItem, серыйМирToolStripMenuItem, идеальныйОтражательToolStripMenuItem, линейнаяКоррекцияToolStripMenuItem, коррекцияСОпорнымЦветомToolStripMenuItem, волны1ToolStripMenuItem, волны2ToolStripMenuItem, стеклоToolStripMenuItem, бинаризацияПоПорогуToolStripMenuItem });
             точечныеToolStripMenuItem.Name = "точечныеToolStripMenuItem";
             точечныеToolStripMenuItem.Size = new Size(173, 26);
             точечныеToolStripMenuItem.Text = "Точечные";
@@ -325,6 +330,41 @@ namespace Lab1
             светящиесяКраяToolStripMenuItem.Text = "Светящиеся края";
             светящиесяКраяToolStripMenuItem.Click += светящиесяКраяToolStripMenuItem_Click;
             // 
+            // морфологияToolStripMenuItem
+            // 
+            морфологияToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { расширениеToolStripMenuItem, сужениеToolStripMenuItem, открытиеToolStripMenuItem, закрытиеToolStripMenuItem });
+            морфологияToolStripMenuItem.Name = "морфологияToolStripMenuItem";
+            морфологияToolStripMenuItem.Size = new Size(270, 34);
+            морфологияToolStripMenuItem.Text = "Морфология";
+            // 
+            // расширениеToolStripMenuItem
+            // 
+            расширениеToolStripMenuItem.Name = "расширениеToolStripMenuItem";
+            расширениеToolStripMenuItem.Size = new Size(270, 34);
+            расширениеToolStripMenuItem.Text = "Расширение";
+            расширениеToolStripMenuItem.Click += расширениеToolStripMenuItem_Click;
+            // 
+            // сужениеToolStripMenuItem
+            // 
+            сужениеToolStripMenuItem.Name = "сужениеToolStripMenuItem";
+            сужениеToolStripMenuItem.Size = new Size(270, 34);
+            сужениеToolStripMenuItem.Text = "Сужение";
+            сужениеToolStripMenuItem.Click += сужениеToolStripMenuItem_Click;
+            // 
+            // открытиеToolStripMenuItem
+            // 
+            открытиеToolStripMenuItem.Name = "открытиеToolStripMenuItem";
+            открытиеToolStripMenuItem.Size = new Size(270, 34);
+            открытиеToolStripMenuItem.Text = "Открытие";
+            открытиеToolStripMenuItem.Click += открытиеToolStripMenuItem_Click;
+            // 
+            // закрытиеToolStripMenuItem
+            // 
+            закрытиеToolStripMenuItem.Name = "закрытиеToolStripMenuItem";
+            закрытиеToolStripMenuItem.Size = new Size(270, 34);
+            закрытиеToolStripMenuItem.Text = "Закрытие";
+            закрытиеToolStripMenuItem.Click += закрытиеToolStripMenuItem_Click;
+            // 
             // openFileDialog1
             // 
             openFileDialog1.FileName = "openFileDialog1";
@@ -434,5 +474,10 @@ namespace Lab1
         private ToolStripMenuItem фильтрМаксмимумToolStripMenuItem;
         private ToolStripMenuItem фильтрминимумToolStripMenuItem;
         private ToolStripMenuItem бинаризацияПоПорогуToolStripMenuItem;
+        private ToolStripMenuItem морфологияToolStripMenuItem;
+        private ToolStripMenuItem расширениеToolStripMenuItem;
+        private ToolStripMenuItem сужениеToolStripMenuItem;
+        private ToolStripMenuItem открытиеToolStripMenuItem;
+        private ToolStripMenuItem закрытиеToolStripMenuItem;
     }
 }

@@ -351,13 +351,53 @@ namespace Lab1
             Filters.Filter filter = new Filters.GlowingEdges();
             backgroundWorker1.RunWorkerAsync(filter);
         }
-        #endregion
+
 
         private void бинаризацияПоПорогуToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string string_constant = Interaction.InputBox("Введите константу: ");
             int string_To_Int_constant = Convert.ToInt32(string_constant);
             Filters.Filter filter = new Filters.Binarization(string_To_Int_constant);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void расширениеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool[,] mask = new bool[3, 3];
+            for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++)
+                    mask[i, j] = true;
+            Filters.Filter filter = new Filters.Dilation(mask);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void сужениеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool[,] mask = new bool[3, 3];
+            for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++)
+                    mask[i, j] = true;
+            Filters.Filter filter = new Filters.Erosion(mask);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void открытиеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool[,] mask = new bool[3, 3];
+            for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++)
+                    mask[i, j] = true;
+            Filters.Filter filter = new Filters.Opening(mask);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void закрытиеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool[,] mask = new bool[3, 3];
+            for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++)
+                    mask[i, j] = true;
+            Filters.Filter filter = new Filters.Closing(mask);
             backgroundWorker1.RunWorkerAsync(filter);
         }
         #endregion
