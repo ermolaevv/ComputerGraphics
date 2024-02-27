@@ -68,6 +68,7 @@ namespace Lab1
             сужениеToolStripMenuItem = new ToolStripMenuItem();
             открытиеToolStripMenuItem = new ToolStripMenuItem();
             закрытиеToolStripMenuItem = new ToolStripMenuItem();
+            градиентToolStripMenuItem = new ToolStripMenuItem();
             openFileDialog1 = new OpenFileDialog();
             saveFileDialog1 = new SaveFileDialog();
             pictureBox1 = new PictureBox();
@@ -332,7 +333,7 @@ namespace Lab1
             // 
             // морфологияToolStripMenuItem
             // 
-            морфологияToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { расширениеToolStripMenuItem, сужениеToolStripMenuItem, открытиеToolStripMenuItem, закрытиеToolStripMenuItem });
+            морфологияToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { расширениеToolStripMenuItem, сужениеToolStripMenuItem, открытиеToolStripMenuItem, закрытиеToolStripMenuItem, градиентToolStripMenuItem });
             морфологияToolStripMenuItem.Name = "морфологияToolStripMenuItem";
             морфологияToolStripMenuItem.Size = new Size(270, 34);
             морфологияToolStripMenuItem.Text = "Морфология";
@@ -364,6 +365,13 @@ namespace Lab1
             закрытиеToolStripMenuItem.Size = new Size(270, 34);
             закрытиеToolStripMenuItem.Text = "Закрытие";
             закрытиеToolStripMenuItem.Click += закрытиеToolStripMenuItem_Click;
+            // 
+            // градиентToolStripMenuItem
+            // 
+            градиентToolStripMenuItem.Name = "градиентToolStripMenuItem";
+            градиентToolStripMenuItem.Size = new Size(270, 34);
+            градиентToolStripMenuItem.Text = "Градиент";
+            градиентToolStripMenuItem.Click += градиентToolStripMenuItem_Click;
             // 
             // openFileDialog1
             // 
@@ -479,5 +487,6 @@ namespace Lab1
         private ToolStripMenuItem сужениеToolStripMenuItem;
         private ToolStripMenuItem открытиеToolStripMenuItem;
         private ToolStripMenuItem закрытиеToolStripMenuItem;
+        private ToolStripMenuItem градиентToolStripMenuItem;
     }
 }
