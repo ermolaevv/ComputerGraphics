@@ -48,6 +48,7 @@ namespace Lab1
             волны1ToolStripMenuItem = new ToolStripMenuItem();
             волны2ToolStripMenuItem = new ToolStripMenuItem();
             стеклоToolStripMenuItem = new ToolStripMenuItem();
+            бинаризацияПоПорогуToolStripMenuItem = new ToolStripMenuItem();
             матричныеToolStripMenuItem = new ToolStripMenuItem();
             размытиеToolStripMenuItem = new ToolStripMenuItem();
             размытиеПоГауссуToolStripMenuItem = new ToolStripMenuItem();
@@ -218,6 +219,13 @@ namespace Lab1
             стеклоToolStripMenuItem.Size = new Size(306, 26);
             стеклоToolStripMenuItem.Text = "Стекло";
             стеклоToolStripMenuItem.Click += стеклоToolStripMenuItem_Click;
+            // 
+            // бинаризацияПоПорогуToolStripMenuItem
+            // 
+            бинаризацияПоПорогуToolStripMenuItem.Name = "бинаризацияПоПорогуToolStripMenuItem";
+            бинаризацияПоПорогуToolStripMenuItem.Size = new Size(368, 34);
+            бинаризацияПоПорогуToolStripMenuItem.Text = "Бинаризация по порогу";
+            бинаризацияПоПорогуToolStripMenuItem.Click += бинаризацияПоПорогуToolStripMenuItem_Click;
             // 
             // матричныеToolStripMenuItem
             // 
@@ -425,5 +433,6 @@ namespace Lab1
         private ToolStripMenuItem светящиесяКраяToolStripMenuItem;
         private ToolStripMenuItem фильтрМаксмимумToolStripMenuItem;
         private ToolStripMenuItem фильтрминимумToolStripMenuItem;
+        private ToolStripMenuItem бинаризацияПоПорогуToolStripMenuItem;
     }
 }

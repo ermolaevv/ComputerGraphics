@@ -352,5 +352,14 @@ namespace Lab1
             backgroundWorker1.RunWorkerAsync(filter);
         }
         #endregion
+
+        private void бинаризацияПоПорогуToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string string_constant = Interaction.InputBox("Введите константу: ");
+            int string_To_Int_constant = Convert.ToInt32(string_constant);
+            Filters.Filter filter = new Filters.Binarization(string_To_Int_constant);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+        #endregion
     }
 }
