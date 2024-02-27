@@ -392,6 +392,11 @@ namespace Lab1
             processMorphOperation(typeof(TopHat));
         }
 
+        private void blackHatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            processMorphOperation(typeof(BlackHat));
+        }
+
         private void processMorphOperation(Type operation)
         {
             MaskInput maskInput = new MaskInput();

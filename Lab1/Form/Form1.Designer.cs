@@ -76,6 +76,7 @@ namespace Lab1
             progressBar1 = new ProgressBar();
             cancelButton = new Button();
             topHatToolStripMenuItem = new ToolStripMenuItem();
+            blackHatToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -424,7 +425,14 @@ namespace Lab1
             topHatToolStripMenuItem.Size = new Size(270, 34);
             topHatToolStripMenuItem.Text = "Top Hat";
             topHatToolStripMenuItem.Click += topHatToolStripMenuItem_Click;
-            // 
+            //
+            // blackHatToolStripMenuItem
+            //
+            blackHatToolStripMenuItem.Name = "blackHatToolStripMenuItem";
+            blackHatToolStripMenuItem.Size = new Size(270, 34);
+            blackHatToolStripMenuItem.Text = "Black Hat";
+            blackHatToolStripMenuItem.Click += blackHatToolStripMenuItem_Click;
+            //
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -497,5 +505,6 @@ namespace Lab1
         private ToolStripMenuItem закрытиеToolStripMenuItem;
         private ToolStripMenuItem градиентToolStripMenuItem;
         private ToolStripMenuItem topHatToolStripMenuItem;
+        private ToolStripMenuItem blackHatToolStripMenuItem;
     }
 }
