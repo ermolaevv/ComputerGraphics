@@ -12,7 +12,7 @@ namespace Lab1.Filters
         {
             Color sourceColor = sourceImage.GetPixel(x, y);
 
-            int intesity = GetIntesity(sourceColor);
+            int intesity = GetIntensity(sourceColor);
 
             Color resultColor = Color.FromArgb(intesity, intesity, intesity);
             return resultColor;

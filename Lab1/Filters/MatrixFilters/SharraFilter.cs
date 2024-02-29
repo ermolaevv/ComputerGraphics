@@ -26,13 +26,18 @@ namespace Lab1.Filters
 
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
-            float gx = ApplyKernel(sourceImage, x, y, horizontalKernel);
-            float gy = ApplyKernel(sourceImage, x, y, verticalKernel);
+            Color gx = ApplyKernel(sourceImage, x, y, horizontalKernel);
+            Color gy = ApplyKernel(sourceImage, x, y, verticalKernel);
 
-            int intensity = (int)Math.Sqrt(gx * gx + gy * gy);
-            intensity = Clamp(intensity, 0, 255);
+            int resultR = (int)Math.Sqrt(gx.R * gx.R + gy.R * gy.R);
+            int resultG = (int)Math.Sqrt(gx.G * gx.G + gy.G * gy.G);
+            int resultB = (int)Math.Sqrt(gx.B * gx.B + gy.B * gy.B);
 
-            return Color.FromArgb(intensity, intensity, intensity);
+            return Color.FromArgb(
+                Clamp((int)resultR, 0, 255),
+                Clamp((int)resultG, 0, 255),
+                Clamp((int)resultB, 0, 255)
+           );
         }
     }
 }

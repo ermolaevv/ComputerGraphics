@@ -39,11 +39,34 @@ namespace Lab1.Filters
             }
             return value;
         }
-        protected int GetIntesity(Color sourceColor)
+        protected int GetIntensity(Color sourceColor)
         {
             return (int)(0.299 * sourceColor.R +
                                 0.587 * sourceColor.G +
                                 0.114 * sourceColor.B);
+        }
+
+        protected Bitmap Difference(Bitmap src1, Bitmap src2)
+        {
+            int width = Math.Max(src1.Width, src2.Width);
+            int height = Math.Max(src1.Height, src2.Height);
+
+            Bitmap result = new Bitmap(width, height);
+
+            for (int i = 0; i < width; i++)
+            {
+                for (int j = 0; (j < height); j++)
+                {
+                    Color color;
+                    if (src1.GetPixel(i, j) == src2.GetPixel(i, j))
+                        color = Color.Black;
+                    else
+                        color = Color.White;
+                    result.SetPixel(i, j, color);
+                }
+            }
+
+            return result;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Lab1.Filters
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker backgroundWorker)
         {
             Filter median = new Filters.MedianFilter(5);
-            Filter pruitt = new Filters.PruittFilter();
+            Filter pruitt = new Filters.SobelFilter();
             Filter maximum = new Filters.MaximumFilter(5);
 
             sourceImage = median.processImage(sourceImage, backgroundWorker);

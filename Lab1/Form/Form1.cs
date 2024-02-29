@@ -1,3 +1,4 @@
+using Lab1.Filters;
 using Microsoft.VisualBasic;
 
 namespace Lab1
@@ -152,7 +153,7 @@ namespace Lab1
 
         private void backgroundWorker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
-            progressBar1.Value = e.ProgressPercentage;
+            progressBar1.Value = Math.Max(Math.Min(e.ProgressPercentage, 100), 0);
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
@@ -349,6 +350,63 @@ namespace Lab1
         private void светящиесяКраяToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters.Filter filter = new Filters.GlowingEdges();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+
+        private void бинаризацияПоПорогуToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string string_constant = Interaction.InputBox("Введите константу: ");
+            int string_To_Int_constant = Convert.ToInt32(string_constant);
+            Filters.Filter filter = new Filters.Binarization(string_To_Int_constant);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void расширениеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            processMorphOperation(typeof(Dilation));
+        }
+
+        private void сужениеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            processMorphOperation(typeof(Erosion));
+        }
+
+        private void открытиеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            processMorphOperation(typeof(Opening));
+        }
+
+        private void закрытиеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            processMorphOperation(typeof(Closing));
+        }
+
+        private void градиентToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            processMorphOperation(typeof(MorphGradient));
+        }
+
+        private void topHatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            processMorphOperation(typeof(TopHat));
+        }
+
+        private void blackHatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            processMorphOperation(typeof(BlackHat));
+        }
+
+        private void processMorphOperation(Type operation)
+        {
+            MaskInput maskInput = new MaskInput();
+            maskInput.ShowDialog();
+            if (maskInput.DialogResult != DialogResult.OK) return;
+
+            bool[,] mask = maskInput.mask;
+            int threshold = maskInput.threshold;
+            Filters.Filter filter = (Filters.Filter)Activator.CreateInstance(operation, mask, threshold);
+
             backgroundWorker1.RunWorkerAsync(filter);
         }
         #endregion

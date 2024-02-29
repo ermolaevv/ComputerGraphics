@@ -11,7 +11,7 @@ namespace Lab1.Filters
         private int k = 15;
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
-            int intensity = GetIntesity(sourceImage.GetPixel(x,y));
+            int intensity = GetIntensity(sourceImage.GetPixel(x,y));
             int R = Clamp(intensity + 2 * k, 0, 255);
             int G = Clamp((int)(intensity + 0.5 * k), 0, 255);
             int B = Clamp(intensity - k, 0, 255);
