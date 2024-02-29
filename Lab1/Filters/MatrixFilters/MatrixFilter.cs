@@ -45,9 +45,12 @@ namespace Lab1.Filters
                 Clamp((int)resultB, 0, 255)
                 );
         }
-        protected float ApplyKernel(Bitmap sourceImage, int x, int y, float[,] kernel)
+        protected Color ApplyKernel(Bitmap sourceImage, int x, int y, float[,] kernel)
         {
-            float result = 0;
+            float resultR = 0;
+            float resultG = 0;
+            float resultB = 0;
+
             int kernelWidth = kernel.GetLength(0);
             int kernelHeight = kernel.GetLength(1);
             int halfKernelWidth = kernelWidth / 2;
@@ -59,11 +62,16 @@ namespace Lab1.Filters
                     int pixelY = Clamp(y + i, 0, sourceImage.Height - 1);
                     Color pixelColor = sourceImage.GetPixel(pixelX, pixelY);
 
-                    float grayIntensity = (pixelColor.R + pixelColor.G + pixelColor.B) / 3f;
-                    result += grayIntensity * kernel[j + halfKernelWidth, i + halfKernelHeight];
+                    resultR += pixelColor.R * kernel[j + halfKernelWidth, i + halfKernelHeight];
+                    resultG += pixelColor.G * kernel[j + halfKernelWidth, i + halfKernelHeight];
+                    resultB += pixelColor.B * kernel[j + halfKernelWidth, i + halfKernelHeight];
                 }
             }
-            return result;
+            return Color.FromArgb(
+                Clamp((int)resultR, 0, 255),
+                Clamp((int)resultG, 0, 255),
+                Clamp((int)resultB, 0, 255)
+           );
         }
     }
 }
