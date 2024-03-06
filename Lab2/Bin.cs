@@ -31,5 +31,9 @@ namespace Lab2
                 }
             }
         }
+        public static short GetValue(int layerNumber, int x_coord, int y_coord)
+        {
+            return array[x_coord + y_coord * X + layerNumber * X * Y];
+        }
     }
 }
