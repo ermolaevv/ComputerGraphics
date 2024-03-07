@@ -335,7 +335,7 @@ namespace Lab1
             // 
             // морфологияToolStripMenuItem
             // 
-            морфологияToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { расширениеToolStripMenuItem, сужениеToolStripMenuItem, открытиеToolStripMenuItem, закрытиеToolStripMenuItem, градиентToolStripMenuItem, topHatToolStripMenuItem });
+            морфологияToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { расширениеToolStripMenuItem, сужениеToolStripMenuItem, открытиеToolStripMenuItem, закрытиеToolStripMenuItem, градиентToolStripMenuItem, topHatToolStripMenuItem, blackHatToolStripMenuItem });
             морфологияToolStripMenuItem.Name = "морфологияToolStripMenuItem";
             морфологияToolStripMenuItem.Size = new Size(270, 34);
             морфологияToolStripMenuItem.Text = "Морфология";

@@ -16,6 +16,7 @@ namespace Lab2.Forms
         private int minTransfer;
         private int maxTransfer;
         private RenderMode renderMode = RenderMode.Quad;
+        private bool isVolumeRendering = false;
 
         public Form1()
         {
@@ -30,7 +31,6 @@ namespace Lab2.Forms
         {
             Application.Idle += Application_Idle;
         }
-
         private void Application_Idle(object sender, EventArgs e)
         {
             while (glControl1.IsIdle)
@@ -39,26 +39,6 @@ namespace Lab2.Forms
                 glControl1.Invalidate();
             }
         }
-
-        private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog dialog = new OpenFileDialog();
-            if (dialog.ShowDialog() == DialogResult.OK)
-            { 
-
-                string str = dialog.FileName;
-                bin.readBIN(str);
-
-                режимРендераToolStripMenuItem.Enabled = true;
-                trackBar1.Maximum = Bin.Z - 1;
-                trackBar1.Enabled = true;
-
-                view.SetupView(glControl1.Width, glControl1.Height);
-                loaded = true;
-                glControl1.Invalidate();
-            }
-        }
-
         private void GlControl1_Paint(object sender, PaintEventArgs e)
         {
             if (!loaded)
@@ -70,15 +50,15 @@ namespace Lab2.Forms
                 switch (renderMode)
                 {
                     case RenderMode.Quad:
-                        view.DrawQuads(currentLayer, minTransfer, maxTransfer);
+                        view.DrawQuads(currentLayer, minTransfer, maxTransfer, isVolumeRendering);
                         break;
                     case RenderMode.QuadStrip:
-                        view.DrawQuadStrip(currentLayer, minTransfer, maxTransfer);
+                        view.DrawQuadStrip(currentLayer, minTransfer, maxTransfer, isVolumeRendering);
                         break;
                     case RenderMode.Texture:
                         if (needReload)
                         {
-                            view.generateTextureImage(currentLayer, minTransfer, maxTransfer);
+                            view.generateTextureImage(currentLayer, minTransfer, maxTransfer, isVolumeRendering);
                             view.Load2DTexture();
                             needReload = false;
                         }
@@ -91,7 +71,6 @@ namespace Lab2.Forms
 
             glControl1.SwapBuffers();
         }
-
         void displayFPS()
         {
             if (DateTime.Now >= nextFPSUpdate)
@@ -111,14 +90,19 @@ namespace Lab2.Forms
                             mode = "Texture";
                             break;
                     }
-                    this.Text = String.Format("Лабораторная работа 2 (FPS={0}, режим {1})", frameCounter, mode);
+
+                    string volume = "";
+                    if (isVolumeRendering)
+                        volume = ", объёмный рендеринг";
+
+                    this.Text = String.Format("Лабораторная работа 2 (FPS={0}, режим {1}{2})", frameCounter, mode, volume);
                 }
                 nextFPSUpdate = DateTime.Now.AddSeconds(1);
                 frameCounter = 0;
             }
             frameCounter++;
         }
-
+        #region Values Input
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             currentLayer = trackBar1.Value;
@@ -135,7 +119,28 @@ namespace Lab2.Forms
             maxTransfer = minTransfer + trackBar3.Value;
             needReload = true;
         }
+        #endregion
+        #region Menu
+        private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            { 
 
+                string str = dialog.FileName;
+                bin.readBIN(str);
+
+                режимРендераToolStripMenuItem.Enabled = true;
+                эToolStripMenuItem.Enabled = true;
+
+                trackBar1.Maximum = Bin.Z - 1;
+                trackBar1.Enabled = true;
+
+                view.SetupView(glControl1.Width, glControl1.Height);
+                loaded = true;
+                glControl1.Invalidate();
+            }
+        }
         private void quadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             renderMode = RenderMode.Quad;
@@ -149,6 +154,28 @@ namespace Lab2.Forms
         private void textureToolStripMenuItem_Click(object sender, EventArgs e)
         {
             renderMode = RenderMode.Texture;
+            needReload = true;
         }
+
+        private void объёмныйРендерингToolStripMenuItem_Click(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+                isVolumeRendering = !isVolumeRendering;
+            else
+            {
+                VolumeRenderView volumeRenderView = new VolumeRenderView(view.volumeWeigths, view.sigma, view.mu);
+                if (volumeRenderView.ShowDialog() == DialogResult.OK)
+                {
+                    view.volumeWeigths = volumeRenderView.weights;
+                    view.sigma = volumeRenderView.sigma;
+                    view.mu = volumeRenderView.mu;
+                    needReload = true;
+                }
+
+            }
+
+            needReload = true;
+        }
+        #endregion
     }
 }

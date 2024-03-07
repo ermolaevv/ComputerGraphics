@@ -37,6 +37,8 @@ namespace Lab2.Forms
             this.quadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quadStripToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.эToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.объёмныйРендерингToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.glControl1 = new OpenTK.GLControl();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -59,7 +61,8 @@ namespace Lab2.Forms
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.открытьToolStripMenuItem,
-            this.режимРендераToolStripMenuItem});
+            this.режимРендераToolStripMenuItem,
+            this.эToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
@@ -105,6 +108,22 @@ namespace Lab2.Forms
             this.textureToolStripMenuItem.Size = new System.Drawing.Size(194, 34);
             this.textureToolStripMenuItem.Text = "Texture";
             this.textureToolStripMenuItem.Click += new System.EventHandler(this.textureToolStripMenuItem_Click);
+            // 
+            // эToolStripMenuItem
+            // 
+            this.эToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.объёмныйРендерингToolStripMenuItem});
+            this.эToolStripMenuItem.Enabled = false;
+            this.эToolStripMenuItem.Name = "эToolStripMenuItem";
+            this.эToolStripMenuItem.Size = new System.Drawing.Size(101, 29);
+            this.эToolStripMenuItem.Text = "Эффекты";
+            // 
+            // объёмныйРендерингToolStripMenuItem
+            // 
+            this.объёмныйРендерингToolStripMenuItem.Name = "объёмныйРендерингToolStripMenuItem";
+            this.объёмныйРендерингToolStripMenuItem.Size = new System.Drawing.Size(296, 34);
+            this.объёмныйРендерингToolStripMenuItem.Text = "Объёмный рендеринг";
+            this.объёмныйРендерингToolStripMenuItem.MouseDown += new System.Windows.Forms.MouseEventHandler(this.объёмныйРендерингToolStripMenuItem_Click);
             // 
             // glControl1
             // 
@@ -238,5 +257,7 @@ namespace Lab2.Forms
         private TrackBar trackBar2;
         private Label label1;
         private Label label2;
+        private ToolStripMenuItem эToolStripMenuItem;
+        private ToolStripMenuItem объёмныйРендерингToolStripMenuItem;
     }
 }
