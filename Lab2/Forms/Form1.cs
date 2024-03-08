@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 using OpenTK.Graphics.OpenGL;
 
@@ -18,29 +19,24 @@ namespace Lab2.Forms
         private RenderMode renderMode = RenderMode.Quad;
         private bool isVolumeRendering = false;
 
-        public Form1()
-        {
+        public Form1() {
             InitializeComponent();
             bin = new Bin();
             view = new View();
-
             this.minTransfer = trackBar2.Value;
             this.maxTransfer = trackBar3.Value;
         }
-        private void Form1_Load(object sender, EventArgs e)
-        {
+        private void Form1_Load(object sender, EventArgs e) {
             Application.Idle += Application_Idle;
         }
-        private void Application_Idle(object sender, EventArgs e)
-        {
+        private void Application_Idle(object sender, EventArgs e) {
             while (glControl1.IsIdle)
             {
                 displayFPS();
                 glControl1.Invalidate();
             }
         }
-        private void GlControl1_Paint(object sender, PaintEventArgs e)
-        {
+        private void GlControl1_Paint(object sender, PaintEventArgs e) {
             if (!loaded)
             {
                 view.FillBlack();
@@ -71,8 +67,7 @@ namespace Lab2.Forms
 
             glControl1.SwapBuffers();
         }
-        void displayFPS()
-        {
+        void displayFPS() {
             if (DateTime.Now >= nextFPSUpdate)
             {
                 if (loaded)
@@ -103,29 +98,25 @@ namespace Lab2.Forms
             frameCounter++;
         }
         #region Values Input
-        private void trackBar1_Scroll(object sender, EventArgs e)
-        {
+        private void trackBar1_Scroll(object sender, EventArgs e) {
             currentLayer = trackBar1.Value;
             needReload = true;
         }
-        private void trackBar2_Scroll(object sender, EventArgs e)
-        {
+        private void trackBar2_Scroll(object sender, EventArgs e) {
             minTransfer = trackBar2.Value;
             needReload = true;
         }
 
-        private void trackBar3_Scroll(object sender, EventArgs e)
-        {
+        private void trackBar3_Scroll(object sender, EventArgs e) {
             maxTransfer = minTransfer + trackBar3.Value;
             needReload = true;
         }
         #endregion
         #region Menu
-        private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void открытьToolStripMenuItem_Click(object sender, EventArgs e) {
             OpenFileDialog dialog = new OpenFileDialog();
             if (dialog.ShowDialog() == DialogResult.OK)
-            { 
+            {
 
                 string str = dialog.FileName;
                 bin.readBIN(str);
@@ -141,24 +132,20 @@ namespace Lab2.Forms
                 glControl1.Invalidate();
             }
         }
-        private void quadToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void quadToolStripMenuItem_Click(object sender, EventArgs e) {
             renderMode = RenderMode.Quad;
         }
 
-        private void quadStripToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void quadStripToolStripMenuItem_Click(object sender, EventArgs e) {
             renderMode = RenderMode.QuadStrip;
         }
 
-        private void textureToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void textureToolStripMenuItem_Click(object sender, EventArgs e) {
             renderMode = RenderMode.Texture;
             needReload = true;
         }
 
-        private void объёмныйРендерингToolStripMenuItem_Click(object sender, MouseEventArgs e)
-        {
+        private void объёмныйРендерингToolStripMenuItem_Click(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Left)
                 isVolumeRendering = !isVolumeRendering;
             else
@@ -176,6 +163,30 @@ namespace Lab2.Forms
 
             needReload = true;
         }
+
+        private void цветТрансферфункцииToolStripMenuItem_Click(object sender, EventArgs e) {
+            ColorDialog colorDialog = new ColorDialog();
+
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                Color selectedColor = colorDialog.Color;
+                int transferMin = trackBar2.Value; // Минимальное значение интенсивности
+                int transferMax = transferMin + trackBar3.Value; // Максимальное значение интенсивности
+
+                // Удаляем все предыдущие диапазоны перед добавлением нового
+                view.ClearTransferFunctionRanges();
+
+                // Добавляем новый диапазон интенсивностей с выбранным цветом
+                view.AddTransferFunctionRange(transferMin, transferMax, selectedColor);
+
+                // Затем вызываем метод SetupTransferFunctions() для обновления всех диапазонов
+                view.SetupTransferFunctions();
+
+                // Перерисовываем
+                glControl1.Invalidate();
+            }
+        }
+
         #endregion
     }
 }
