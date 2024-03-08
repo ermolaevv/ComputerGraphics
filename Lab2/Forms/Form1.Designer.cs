@@ -208,7 +208,7 @@ namespace Lab2.Forms
             // trackBar2
             // 
             this.trackBar2.Location = new System.Drawing.Point(92, 35);
-            this.trackBar2.Maximum = 2000;
+            this.trackBar2.Maximum = 1999;
             this.trackBar2.Name = "trackBar2";
             this.trackBar2.Size = new System.Drawing.Size(667, 69);
             this.trackBar2.TabIndex = 5;

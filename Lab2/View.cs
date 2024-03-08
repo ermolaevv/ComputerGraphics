@@ -66,7 +66,7 @@ namespace Lab2
         public void DrawQuadStrip(int layerNumber, int minTransfer, int maxTransfer, bool isVolume)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            for (int y_coord = 0; y_coord < Bin.Y; y_coord++)
+            for (int y_coord = 0; y_coord < Bin.Y - 1; y_coord++)
             {
                 GL.Begin(BeginMode.QuadStrip);
                 for (int x_coord = 0; x_coord < Bin.X; x_coord++)
