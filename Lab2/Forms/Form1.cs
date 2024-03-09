@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 using OpenTK.Graphics.OpenGL;
 
@@ -17,6 +18,7 @@ namespace Lab2.Forms
         private int maxTransfer;
         private RenderMode renderMode = RenderMode.Quad;
         private bool isVolumeRendering = false;
+        private bool isColoring = false;
 
         public Form1()
         {
@@ -50,15 +52,15 @@ namespace Lab2.Forms
                 switch (renderMode)
                 {
                     case RenderMode.Quad:
-                        view.DrawQuads(currentLayer, minTransfer, maxTransfer, isVolumeRendering);
+                        view.DrawQuads(currentLayer, minTransfer, maxTransfer, isVolumeRendering, isColoring);
                         break;
                     case RenderMode.QuadStrip:
-                        view.DrawQuadStrip(currentLayer, minTransfer, maxTransfer, isVolumeRendering);
+                        view.DrawQuadStrip(currentLayer, minTransfer, maxTransfer, isVolumeRendering, isColoring);
                         break;
                     case RenderMode.Texture:
                         if (needReload)
                         {
-                            view.generateTextureImage(currentLayer, minTransfer, maxTransfer, isVolumeRendering);
+                            view.generateTextureImage(currentLayer, minTransfer, maxTransfer, isVolumeRendering, isColoring);
                             view.Load2DTexture();
                             needReload = false;
                         }
@@ -111,6 +113,7 @@ namespace Lab2.Forms
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
             minTransfer = trackBar2.Value;
+            maxTransfer = minTransfer + trackBar3.Value;
             needReload = true;
         }
 
@@ -125,7 +128,7 @@ namespace Lab2.Forms
         {
             OpenFileDialog dialog = new OpenFileDialog();
             if (dialog.ShowDialog() == DialogResult.OK)
-            { 
+            {
 
                 string str = dialog.FileName;
                 bin.readBIN(str);
@@ -169,13 +172,31 @@ namespace Lab2.Forms
                     view.volumeWeigths = volumeRenderView.weights;
                     view.sigma = volumeRenderView.sigma;
                     view.mu = volumeRenderView.mu;
-                    needReload = true;
+                    isVolumeRendering = true;
                 }
 
             }
 
             needReload = true;
         }
+
+        private void цветТрансферфункцииToolStripMenuItem_Click(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+                isColoring = !isColoring;
+            else
+            {
+                ColorInputForm colorInputForm = new ColorInputForm(currentLayer, view.transferFunctionRanges, minTransfer, maxTransfer);
+
+                if (colorInputForm.ShowDialog() == DialogResult.OK)
+                {
+                    view.transferFunctionRanges = colorInputForm.transferFunctionRanges;
+                    isColoring = true;
+                }
+            }
+            needReload = true;
+        }
+
         #endregion
     }
 }
