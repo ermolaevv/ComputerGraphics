@@ -122,7 +122,7 @@ namespace Lab2
 
             GL.TexImage2D(
                 TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba,
-                data.Width, data.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Rgba,
+                data.Width, data.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra,
                 PixelType.UnsignedByte, data.Scan0
             );
 
@@ -239,7 +239,7 @@ namespace Lab2
         public void SetupTransferFunctions()
         {
             AddTransferFunctionRange(0, 10, Color.Black); 
-            AddTransferFunctionRange(30, 70, Color.FromArgb(255,0,128)); // Мышцы
+            AddTransferFunctionRange(30, 70, Color.FromArgb(255,255,0,128)); // Мышцы
             AddTransferFunctionRange(200, 10000, Color.White); // Кости
         }
 
