@@ -47,6 +47,7 @@ namespace Lab2.Forms
             this.label1 = new System.Windows.Forms.Label();
             this.trackBar3 = new System.Windows.Forms.TrackBar();
             this.trackBar2 = new System.Windows.Forms.TrackBar();
+            this.цветТрансферфункцииToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -112,7 +113,7 @@ namespace Lab2.Forms
             // эToolStripMenuItem
             // 
             this.эToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.объёмныйРендерингToolStripMenuItem});
+            this.объёмныйРендерингToolStripMenuItem, this.цветТрансферфункцииToolStripMenuItem});
             this.эToolStripMenuItem.Enabled = false;
             this.эToolStripMenuItem.Name = "эToolStripMenuItem";
             this.эToolStripMenuItem.Size = new System.Drawing.Size(101, 29);
@@ -214,7 +215,13 @@ namespace Lab2.Forms
             this.trackBar2.TabIndex = 5;
             this.trackBar2.TickFrequency = 100;
             this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
-            // 
+            //
+            // цветТрансферфункцииToolStripMenuItem
+            //
+            this.цветТрансферфункцииToolStripMenuItem.Name = "цветТрансферфункцииToolStripMenuItem";
+            this.цветТрансферфункцииToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.цветТрансферфункцииToolStripMenuItem.Text = "Цвет трансфер-функции";
+            this.цветТрансферфункцииToolStripMenuItem.MouseDown += new System.Windows.Forms.MouseEventHandler(this.цветТрансферфункцииToolStripMenuItem_Click);
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -259,5 +266,6 @@ namespace Lab2.Forms
         private Label label2;
         private ToolStripMenuItem эToolStripMenuItem;
         private ToolStripMenuItem объёмныйРендерингToolStripMenuItem;
+        private ToolStripMenuItem цветТрансферфункцииToolStripMenuItem;
     }
 }
