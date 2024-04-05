@@ -33,16 +33,19 @@ namespace Lab3
             // 
             // glControl1
             // 
+            this.glControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.glControl1.BackColor = System.Drawing.Color.Black;
-            this.glControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.glControl1.Location = new System.Drawing.Point(0, 0);
+            this.glControl1.Location = new System.Drawing.Point(-1, -2);
             this.glControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.glControl1.Name = "glControl1";
-            this.glControl1.Size = new System.Drawing.Size(1178, 1143);
+            this.glControl1.Size = new System.Drawing.Size(786, 764);
             this.glControl1.TabIndex = 0;
             this.glControl1.VSync = false;
             this.glControl1.Load += new System.EventHandler(this.glControl1_Load);
             this.glControl1.Paint += new System.Windows.Forms.PaintEventHandler(this.glControl1_Paint);
+            this.glControl1.Resize += new System.EventHandler(this.glControl1_Resize);
             // 
             // Form1
             // 

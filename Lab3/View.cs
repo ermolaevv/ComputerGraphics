@@ -29,19 +29,38 @@ namespace Lab3
             address = GL.CreateShader(type);
             GL.ShaderSource(address, File.ReadAllText(filename));
             GL.CompileShader(address);
+
+            int isCompiled = -1;
+            GL.GetShader(address, ShaderParameter.CompileStatus, out isCompiled);
+            if (isCompiled == 0)
+            {
+                int maxLength = 0;
+                GL.GetShader(address, ShaderParameter.InfoLogLength, out maxLength);
+
+                string errorLog;
+                GL.GetShaderInfoLog(address, maxLength, out maxLength, out errorLog);
+                Console.WriteLine(errorLog);
+
+                GL.DeleteShader(address); 
+                return;
+            }
+
             GL.AttachShader(program, address);
             Console.WriteLine(GL.GetShaderInfoLog(address));
         }
 
         public void InitShaders()
         {
-            BasicProgramID = GL.CreateProgram(); // создание объекта программы 
+            BasicProgramID = GL.CreateProgram(); // создание объекта программы
+
             loadShader("..\\..\\..\\Shaders\\raytracing.vert", ShaderType.VertexShader, BasicProgramID,
             out BasicVertexShader);
             loadShader("..\\..\\..\\Shaders\\raytracing.frag", ShaderType.FragmentShader, BasicProgramID,
             out BasicFragmentShader);
+
             GL.LinkProgram(BasicProgramID);
             GL.ValidateProgram(BasicProgramID);
+
             // Проверяем успех компоновки
             int status = 0;
             GL.GetProgram(BasicProgramID, GetProgramParameterName.LinkStatus, out status);
@@ -61,28 +80,33 @@ namespace Lab3
                 new Vector3(-1f, 1f, 0f)
             };
 
+            GL.UseProgram(BasicProgramID);
+            
             GL.GenBuffers(1, out vbo_position);
             GL.BindBuffer(BufferTarget.ArrayBuffer, vbo_position);
 
             GL.BufferData<Vector3>(BufferTarget.ArrayBuffer, (IntPtr)(vertdata.Length *
              Vector3.SizeInBytes), vertdata, BufferUsageHint.StaticDraw);
 
-            GL.VertexAttribPointer(attribute_vpos, 3, VertexAttribPointerType.Float, false, 0, 0);
-            GL.EnableVertexAttribArray(0);
+            //GL.VertexAttribPointer(attribute_vpos, 3, VertexAttribPointerType.Float, false, 0, 0);
+            //GL.EnableVertexAttribArray(0);
 
-            GL.Uniform3(uniform_pos, campos);
-            GL.Uniform1(uniform_aspect, aspect);
-            GL.UseProgram(BasicProgramID);
+            //GL.Uniform3(uniform_pos, campos);
+            //GL.Uniform1(uniform_aspect, aspect);
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
+
         }
 
         public void Update()
         {
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            GL.Enable(EnableCap.DepthTest);
-            GL.EnableVertexAttribArray(attribute_vpos);
-            GL.DrawArrays(PrimitiveType.Quads, 0, 4);
-            GL.DisableVertexAttribArray(attribute_vpos);
+            //GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+            GL.BindBuffer(BufferTarget.ArrayBuffer, vbo_position);
+                GL.VertexPointer(3, VertexPointerType.Float, Vector3.SizeInBytes, 0);
+            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
+
+            GL.EnableClientState(ArrayCap.VertexArray);
+                GL.DrawArrays(PrimitiveType.Quads, 0, 4);
+            GL.DisableClientState(ArrayCap.VertexArray);
         }
 
         public void Setup(int width, int height)
