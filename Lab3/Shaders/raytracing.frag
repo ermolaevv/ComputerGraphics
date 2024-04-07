@@ -240,7 +240,10 @@ bool Raytrace ( SRay ray, float start, float final, inout SIntersection intersec
         {
             intersect.Time = test;
             intersect.Point = ray.Origin + ray.Direction * test;
-            intersect.Normal = normalize(cross(triangle.v1 - triangle.v2, triangle.v3 - triangle.v2));
+            vec3 edge1 = triangle.v2 - triangle.v1;
+            vec3 edge2 = triangle.v3 - triangle.v1;
+            intersect.Normal = normalize(cross(edge1, edge2));
+            if (dot(intersect.Normal, ray.Direction) > 0.0) { intersect.Normal = -intersect.Normal; }
             intersect.Color = materials[triangle.MaterialIdx].Color;
             intersect.LightCoeffs = materials[triangle.MaterialIdx].LightCoeffs;
             intersect.ReflectionCoef = materials[triangle.MaterialIdx].ReflectionCoef;
@@ -284,7 +287,7 @@ float Shadow(SLight currLight, SIntersection intersect)
 SCamera initializeDefaultCamera()
 {
     SCamera camera;
-    camera.Position = vec3(0.0, 0.0, -8.0);
+    camera.Position = vec3(0.0, 0.0, -12.0);
     camera.View = vec3(0.0, 0.0, 1.0);
     camera.Up = vec3(0.0, 1.0, 0.0);
     camera.Side = vec3(1.0, 0.0, 0.0);
