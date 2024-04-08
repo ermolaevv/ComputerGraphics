@@ -14,6 +14,10 @@ const vec3 Unit = vec3 ( 1.0, 1.0, 1.0 );
 uniform vec2 iResolution;
 uniform int uMaxTraceDepth;
 
+uniform vec3 uMaterialColor; 
+uniform float uMaterialTransparency;
+uniform float uMaterialReflectivity; 
+
 /*** DATA STRUCTURES ***/
 struct SSphere
 {

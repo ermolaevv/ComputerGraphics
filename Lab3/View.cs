@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
+using System.Timers;
 
 namespace Lab3
 {
@@ -23,7 +24,8 @@ namespace Lab3
         private Vector3 campos;
         private double aspect;
         private int uniform_aspect;
-
+        private System.Timers.Timer materialUpdateTimer;
+        private Random rnd = new Random();
         private void loadShader(String filename, ShaderType type, int program, out int address)
         {
             address = GL.CreateShader(type);
@@ -131,5 +133,29 @@ namespace Lab3
             GL.MatrixMode(MatrixMode.Modelview);
             GL.LoadMatrix(ref viewMat);
         }
+
+        private void StartMaterialUpdateTimer()
+        {
+            System.Threading.Timer timer = new System.Threading.Timer((state) =>
+            {
+                Vector3 color = new Vector3((float)rnd.NextDouble(), (float)rnd.NextDouble(), (float)rnd.NextDouble());
+                float transparency = (float)rnd.NextDouble();
+                float reflectivity = (float)rnd.NextDouble();
+                SetMaterialProperties(color, transparency, reflectivity);
+            },
+            null, 0, 5000);
+        }
+
+        public void SetMaterialProperties(Vector3 color, float transparency, float reflectivity)
+        {
+            GL.UseProgram(BasicProgramID);
+            GL.Uniform3(GL.GetUniformLocation(BasicProgramID, "uMaterialColor"), color);
+            GL.Uniform1(GL.GetUniformLocation(BasicProgramID, "uMaterialTransparency"), transparency);
+            GL.Uniform1(GL.GetUniformLocation(BasicProgramID, "uMaterialReflectivity"), reflectivity);
+            Update(); 
+        }
+
+
+
     }
 }
