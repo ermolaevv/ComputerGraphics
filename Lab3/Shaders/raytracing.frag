@@ -12,6 +12,11 @@ const int MAX_TRACE_DEPTH = 8;
 const vec3 Unit = vec3 ( 1.0, 1.0, 1.0 );
 
 uniform vec2 iResolution;
+uniform int uMaxTraceDepth;
+
+uniform vec3 uMaterialColor; 
+uniform float uMaterialTransparency;
+uniform float uMaterialReflectivity; 
 
 /*** DATA STRUCTURES ***/
 struct SSphere
@@ -150,7 +155,7 @@ bool isFull()
 
 bool pushRay(STracingRay secondaryRay)
 {
-    if(!isFull() && secondaryRay.depth < MAX_TRACE_DEPTH)
+    if(!isFull() && secondaryRay.depth < uMaxTraceDepth)
     {
         stack.arr[stack.count++] = secondaryRay;
         return true;
