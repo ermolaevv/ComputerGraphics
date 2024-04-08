@@ -70,6 +70,13 @@ namespace Lab3
             GL.DetachShader(BasicProgramID, BasicFragmentShader);
             GL.DeleteShader(BasicVertexShader);
             GL.DeleteShader(BasicFragmentShader);
+
+            // Получаем расположение uniform переменной
+            int uMaxTraceDepthLocation = GL.GetUniformLocation(BasicProgramID, "uMaxTraceDepth");
+
+            // установка значения для uniform переменной
+            GL.UseProgram(BasicProgramID); // запуск шейдерной программы перед установкой uniform переменной
+            GL.Uniform1(uMaxTraceDepthLocation, 5);
         }
         public void InitBuffer()
         {
