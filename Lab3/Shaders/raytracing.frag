@@ -14,7 +14,7 @@ const int PANE_COUNT = 6;
 const int TRIANGLE_COUNT = 1;
 const int SPHERE_COUNT = 2;
 const int TETRAHEDRON_COUNT = 1;
-const int MATERIAL_COUNT = 7;
+const int MATERIAL_COUNT = 8;
 
 uniform vec2 iResolution;
 uniform vec3 iCamPos;
@@ -496,7 +496,7 @@ void initializeDefaultScene()
     cubes[2] = initCube(vec3( 8.0,  -2.0, -14.0), vec3(0), 5, 4);
 
     /** TETRAHEDRONS **/
-    tetrahedrons[0] = initTetrahedron(vec3(-7.0, 3.0, 1.0), vec3(0,25,-30), 4, 5);
+    tetrahedrons[0] = initTetrahedron(vec3(-7.0, 3.0, 1.0), vec3(0,25,-30), 4, 7);
 }
 
 void initializeDefaultLightMaterials(out SLight light) {
@@ -546,6 +546,12 @@ void initializeDefaultLightMaterials(out SLight light) {
 	materials[6].ReflectionCoef = uMaterialReflectivity;
 	materials[6].RefractionCoef = uMaterialTransparency;
 	materials[6].MaterialType = DIFFUSE_REFLECTION;
+
+	materials[7].Color = normalize(vec3(255, 255, 255));
+	materials[7].LightCoeffs = vec4(lightCoefs);
+	materials[7].ReflectionCoef = 0.04;
+	materials[7].RefractionCoef = 1.5;
+	materials[7].MaterialType = REFRACTION;
 }
 
 void main(void)
@@ -603,14 +609,37 @@ void main(void)
                 {
                     bool outside = (dot(ray.Direction, intersect.Normal) < 0);
                     vec3 bias = EPSILON * intersect.Normal;
-                    float ior = outside ? 1.0/intersect.RefractionCoef : intersect.RefractionCoef;
+                    float air = 1;
+                    float eta = outside ? air / intersect.RefractionCoef : intersect.RefractionCoef / air;
                     int signOut = outside ? 1 : -1;
-                    float kr = 0.99;
-                    vec3 reflectionDirection = normalize(reflect(ray.Direction, intersect.Normal));
-                    vec3 reflectionRayOrig = outside ? intersect.Point + bias : intersect.Point - bias;
-                    STracingRay reflectionRay = STracingRay(SRay(reflectionRayOrig, reflectionDirection), trRay.contribution * (1 - kr), trRay.depth + 1);
-                    pushRay(reflectionRay);
-                    break;
+
+                    // if(intersect.ReflectionCoef < 1)
+                    // {
+                    //     float contribution = trRay.contribution * (1 - intersect.ReflectionCoef);
+                    //     float shadowing = Shadow(uLight, intersect);
+                    //     resultColor +=  contribution * Phong(intersect, uLight, shadowing);
+                    // }
+
+                    // {
+                    //     float contribution = trRay.contribution * (1 - intersect.ReflectionCoef);
+                    //     float shadowing = Shadow(uLight, intersect);
+                    //     resultColor +=  contribution * Phong(intersect, uLight, shadowing);
+                    // }
+                    if (outside) {
+                        vec3 reflectionDirection = normalize(reflect(ray.Direction, intersect.Normal));
+                        vec3 reflectionRayOrig = outside ? intersect.Point + bias : intersect.Point - bias;
+                        STracingRay reflectionRay = STracingRay(SRay(reflectionRayOrig + reflectionDirection * EPSILON, reflectionDirection),
+                                                                trRay.contribution * intersect.ReflectionCoef, trRay.depth + 1);
+                        pushRay(reflectionRay);
+                    }
+
+                    float ni = dot(intersect.Normal, ray.Direction);
+                    float cosb = sqrt(1 - pow(eta,2) * (1 - pow(ni, 2)));
+
+                    vec3 refractionDirection = normalize(eta * ray.Direction - (cosb + eta * ni) * intersect.Normal);
+                    vec3 refractionRayOrig = outside ? intersect.Point + bias : intersect.Point - bias;
+                    STracingRay refractionRay = STracingRay(SRay(intersect.Point, refractionDirection), trRay.contribution * (1 - intersect.ReflectionCoef), trRay.depth + 1);
+                    pushRay(refractionRay);
                 }
             } // switch
         } //  if
