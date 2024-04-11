@@ -121,6 +121,7 @@ struct Stack
 
 vec2 uv;
 SLight uLight;
+SLight uLight2;
 SPane panes[PANE_COUNT]; // ROOM
 SMaterial materials[MATERIAL_COUNT];
 Stack stack;
@@ -499,10 +500,10 @@ void initializeDefaultScene()
     tetrahedrons[0] = initTetrahedron(vec3(-7.0, 3.0, 1.0), vec3(0,25,-30), 4, 7);
 }
 
-void initializeDefaultLightMaterials(out SLight light) {
+void initializeDefaultLightMaterials() {
     //** LIGHT **//
-    light.Position = vec3(4.0, 15.0, -4.0f);
-
+    uLight.Position = vec3(4.0, 15.0, -4.0f);
+    uLight2.Position = vec3(4.1, 15.1, -4.0f);
     /** MATERIALS **/
     vec4 lightCoefs = vec4(0.4, 0.9, 0.0, 512.0);
     materials[0].Color = vec3(1.0, 1.0, 1.0);
@@ -563,7 +564,7 @@ void main(void)
 
     uCamera = initializeCamera(iCamPos, normalize(vec3(uv, 1.0)), iScope);
     initializeDefaultScene();
-    initializeDefaultLightMaterials(uLight);
+    initializeDefaultLightMaterials();
     SRay ray = GenerateRay( uCamera);
 
     SIntersection intersect;
@@ -587,7 +588,8 @@ void main(void)
                 case DIFFUSE_REFLECTION:
                 {
                     float shadowing = Shadow(uLight, intersect);
-                    resultColor += trRay.contribution * Phong ( intersect, uLight, shadowing );
+                    float shadowing2 = Shadow(uLight2, intersect);
+                    resultColor += trRay.contribution * Phong ( intersect, uLight, (shadowing + shadowing2)/2 );
                     break;
                 }
                 case MIRROR_REFLECTION:
@@ -596,7 +598,8 @@ void main(void)
                     {
                         float contribution = trRay.contribution * (1 - intersect.ReflectionCoef);
                         float shadowing = Shadow(uLight, intersect);
-                        resultColor +=  contribution * Phong(intersect, uLight, shadowing);
+                        float shadowing2 = Shadow(uLight2, intersect);
+                        resultColor +=  contribution * Phong(intersect, uLight, (shadowing + shadowing2)/2 );
                     }
                     vec3 reflectDirection = reflect(ray.Direction, intersect.Normal); // creare reflection ray
                     float contribution = trRay.contribution * intersect.ReflectionCoef;
