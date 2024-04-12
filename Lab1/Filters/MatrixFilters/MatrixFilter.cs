@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,6 +44,34 @@ namespace Lab1.Filters
                 Clamp((int)resultG, 0, 255),
                 Clamp((int)resultB, 0, 255)
                 );
+        }
+        protected Color ApplyKernel(Bitmap sourceImage, int x, int y, float[,] kernel)
+        {
+            float resultR = 0;
+            float resultG = 0;
+            float resultB = 0;
+
+            int kernelWidth = kernel.GetLength(0);
+            int kernelHeight = kernel.GetLength(1);
+            int halfKernelWidth = kernelWidth / 2;
+            int halfKernelHeight = kernelHeight / 2;
+
+            for (int i = -halfKernelHeight; i <= halfKernelHeight; i++){
+                for (int j = -halfKernelWidth; j <= halfKernelWidth; j++){
+                    int pixelX = Clamp(x + j, 0, sourceImage.Width - 1);
+                    int pixelY = Clamp(y + i, 0, sourceImage.Height - 1);
+                    Color pixelColor = sourceImage.GetPixel(pixelX, pixelY);
+
+                    resultR += pixelColor.R * kernel[j + halfKernelWidth, i + halfKernelHeight];
+                    resultG += pixelColor.G * kernel[j + halfKernelWidth, i + halfKernelHeight];
+                    resultB += pixelColor.B * kernel[j + halfKernelWidth, i + halfKernelHeight];
+                }
+            }
+            return Color.FromArgb(
+                Clamp((int)resultR, 0, 255),
+                Clamp((int)resultG, 0, 255),
+                Clamp((int)resultB, 0, 255)
+           );
         }
     }
 }
