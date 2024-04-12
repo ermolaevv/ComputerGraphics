@@ -492,7 +492,7 @@ void initializeDefaultScene()
     spheres[1].MaterialIdx = 5;
 
     /** CUBES **/
-    cubes[0] = initCube(vec3( 6.0, -1.0,  -4.0), vec3(-10.0, -15.0, 40.0), 1, 6);
+    cubes[0] = initCube(vec3( 6.0, -1.0,  -4.0), vec3(-10.0, -15.0, 40.0), 1, 7);
     cubes[1] = initCube(vec3(-8.0,  -2.0, -14.0), vec3(0), 5, 4);
     cubes[2] = initCube(vec3( 8.0,  -2.0, -14.0), vec3(0), 5, 4);
 
@@ -610,40 +610,40 @@ void main(void)
                 }
                 case REFRACTION:
                 {
-                    bool outside = (dot(ray.Direction, intersect.Normal) < 0);
-                    vec3 bias = EPSILON * intersect.Normal;
-                    float air = 1;
-                    float eta = outside ? air / intersect.RefractionCoef : intersect.RefractionCoef / air;
-                    int signOut = outside ? 1 : -1;
+                    bool outside = dot(ray.Direction, intersect.Normal) < 0;
+                    vec3 refractionNormal = outside ? intersect.Normal : -intersect.Normal;
+                    float ior = outside ? intersect.RefractionCoef : 1.0 / intersect.RefractionCoef;
+                    float cosi = -dot(refractionNormal, ray.Direction);
+                    float k = 1.0 - ior * ior * (1.0 - cosi * cosi);
+                    vec3 refracted = vec3(0.0);
 
-                    // if(intersect.ReflectionCoef < 1)
-                    // {
-                    //     float contribution = trRay.contribution * (1 - intersect.ReflectionCoef);
-                    //     float shadowing = Shadow(uLight, intersect);
-                    //     resultColor +=  contribution * Phong(intersect, uLight, shadowing);
-                    // }
+                    if (k >= 0.0) {
+                        vec3 refractionDirection = normalize(ior * ray.Direction + (ior * cosi - sqrt(k)) * refractionNormal);
+                        vec3 refractionOrigin = intersect.Point + refractionNormal * EPSILON;
+                        SRay refractedRay = SRay(refractionOrigin, refractionDirection);
 
-                    // {
-                    //     float contribution = trRay.contribution * (1 - intersect.ReflectionCoef);
-                    //     float shadowing = Shadow(uLight, intersect);
-                    //     resultColor +=  contribution * Phong(intersect, uLight, shadowing);
-                    // }
-                    if (outside) {
-                        vec3 reflectionDirection = normalize(reflect(ray.Direction, intersect.Normal));
-                        vec3 reflectionRayOrig = outside ? intersect.Point + bias : intersect.Point - bias;
-                        STracingRay reflectionRay = STracingRay(SRay(reflectionRayOrig + reflectionDirection * EPSILON, reflectionDirection),
-                                                                trRay.contribution * intersect.ReflectionCoef, trRay.depth + 1);
-                        pushRay(reflectionRay);
+                        if (Raytrace(refractedRay, EPSILON, BIG, intersect)) {
+                            refracted = intersect.Color; 
+                        }
+                    }
+    
+                    vec3 reflected = vec3(0.0);
+                    if (intersect.ReflectionCoef > 0.0) {
+                        vec3 reflectionDirection = reflect(ray.Direction, intersect.Normal);
+                        vec3 reflectionOrigin = intersect.Point + intersect.Normal * EPSILON;
+                        SRay reflectedRay = SRay(reflectionOrigin, reflectionDirection);
+                        if (Raytrace(reflectedRay, EPSILON, BIG, intersect)) {
+                            reflected = intersect.Color; 
+                        }
                     }
 
-                    float ni = dot(intersect.Normal, ray.Direction);
-                    float cosb = sqrt(1 - pow(eta,2) * (1 - pow(ni, 2)));
-
-                    vec3 refractionDirection = normalize(eta * ray.Direction - (cosb + eta * ni) * intersect.Normal);
-                    vec3 refractionRayOrig = outside ? intersect.Point + bias : intersect.Point - bias;
-                    STracingRay refractionRay = STracingRay(SRay(intersect.Point, refractionDirection), trRay.contribution * (1 - intersect.ReflectionCoef), trRay.depth + 1);
-                    pushRay(refractionRay);
+                    float reflectivity = pow(1.0 - cosi, 3) * intersect.ReflectionCoef;
+                    float transparency = 1.0 - reflectivity;
+                    vec3 color = Phong(intersect, uLight, Shadow(uLight, intersect));
+                    resultColor += trRay.contribution * (color * transparency + reflected * reflectivity + refracted * transparency);
                 }
+                break;
+
             } // switch
         } //  if
     } // while
